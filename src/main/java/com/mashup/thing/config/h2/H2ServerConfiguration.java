@@ -1,4 +1,4 @@
-package com.mashup.thing.config;
+package com.mashup.thing.config.h2;
 
 import org.h2.tools.Server;
 import org.springframework.boot.context.properties.ConfigurationProperties;
