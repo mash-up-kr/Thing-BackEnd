@@ -20,7 +20,7 @@ public class SwaggerConfiguration {
                 .groupName("com.mashup.thing")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.mashup.thing.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.mashup.thing"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false);
