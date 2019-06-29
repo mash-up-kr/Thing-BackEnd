@@ -3,7 +3,7 @@ package com.mashup.thing.user;
 import java.util.Arrays;
 
 enum Gender {
-    MAN(1), WOMAN(2), ETC(3), NONE(4);
+    WOMAN(0), MAN(1), ETC(2), NONE(3);
 
     private Integer gender;
 
