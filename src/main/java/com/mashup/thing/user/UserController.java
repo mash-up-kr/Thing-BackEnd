@@ -7,9 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -39,5 +37,30 @@ public class UserController {
         userService.addUser(reqSignUpUserDto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    //유저정보조회
+
+    @ApiOperation(value = "USER FIND", notes = "USER FIND API")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "USER 조회 성공"),
+            @ApiResponse(code = 400, message = "UID - NULL"),
+            @ApiResponse(code = 500, message = "서버 에러")
+    })
+    @GetMapping("/v1/users/{uid}")
+    public ResponseEntity<FindUserDto> findUser(@PathVariable(value = "uid") String uid) {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findUser(uid));
+    }
+
+   //수정
+
+    @PatchMapping("/v1/users/{uid}")
+    public ResponseEntity<Void> updateUser(@RequestBody @Valid UpdateUserDto updateUserDto,@PathVariable (value="uid") String uid) {
+
+        userService.updateUser(updateUserDto ,uid);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
 
 }

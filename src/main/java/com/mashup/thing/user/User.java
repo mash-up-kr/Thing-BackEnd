@@ -24,11 +24,21 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    private String imageUrl;
+
     private User(ReqSignUpUserDto reqSignUpUserDto) {
         this.uid = reqSignUpUserDto.getUid();
         this.nickName = reqSignUpUserDto.getNickName();
         this.dateBirth = reqSignUpUserDto.getDateBirth();
         this.gender = Gender.from(reqSignUpUserDto.getGender());
+    }
+
+    public  User (String uid, int dateBirth, String nickName,String gender){
+        this.uid = uid;
+        this.dateBirth = dateBirth;
+        this.nickName = nickName;
+        this.gender = Gender.valueOf(gender);
+
     }
 
     public static User from(ReqSignUpUserDto reqSignUpUserDto) {
