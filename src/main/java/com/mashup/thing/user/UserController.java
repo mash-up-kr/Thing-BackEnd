@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation(value = "USER SIGN UP", notes = "USER SIGN UP API")
+    @ApiOperation(value = "USER SIGN UP", notes = "USER SIGN UP API - Gender(Enum) : WOMAN - 0, MAN - 1, ETC - 2")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "USER 등록 성공"),
             @ApiResponse(code = 400, message = "UID or NickName - NULL"),
