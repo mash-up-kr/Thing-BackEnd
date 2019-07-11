@@ -1,19 +1,23 @@
 package com.mashup.thing.user;
 
+import com.mashup.thing.user.domain.Gender;
+import com.mashup.thing.user.domain.User;
+import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class UserTest {
+public class UserMapperTest {
 
     @Test
-    public void testCreateUser(){
+    public void testToUser(){
+        UserMapper userMapper = new UserMapper();
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
         reqSignUpUserDto.setNickName("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 
-        User user = User.from(reqSignUpUserDto);
+        User user = userMapper.toUser(reqSignUpUserDto);
 
         assertThat(user.getGender()).isEqualTo(Gender.NONE);
     }
