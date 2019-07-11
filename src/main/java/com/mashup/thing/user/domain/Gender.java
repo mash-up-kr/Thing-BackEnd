@@ -2,6 +2,7 @@ package com.mashup.thing.user.domain;
 
 import java.util.Arrays;
 
+
 public enum Gender {
     WOMAN(0), MAN(1), ETC(2), NONE(3);
 

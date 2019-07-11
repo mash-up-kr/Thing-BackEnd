@@ -14,6 +14,5 @@ public class RankingService {
 
     public ResRankingsDto getRankings(Integer page, FilterType filter, Long categoryId) {
         return categoryRankingService.getRankings(page, filter, categoryId);
-
     }
 }
