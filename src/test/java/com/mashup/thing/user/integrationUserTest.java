@@ -1,5 +1,6 @@
 package com.mashup.thing.user;
 
+import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

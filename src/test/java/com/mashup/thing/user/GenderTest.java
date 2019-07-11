@@ -1,5 +1,6 @@
 package com.mashup.thing.user;
 
+import com.mashup.thing.user.domain.Gender;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
