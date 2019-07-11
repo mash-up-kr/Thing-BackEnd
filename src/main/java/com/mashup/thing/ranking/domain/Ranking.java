@@ -24,5 +24,9 @@ public class Ranking {
     private String bannerImgUrl;
     private Long categoryId;
     private Long youTuberId;
-    private String soaring;
+    private Double soaring;
+
+    public void setRanking(Long ranking) {
+        this.ranking = ranking;
+    }
 }
