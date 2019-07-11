@@ -1,8 +1,8 @@
-package com.mashup.thing.user;
+package com.mashup.thing.user.domain;
 
 import java.util.Arrays;
 
-enum Gender {
+public enum Gender {
     WOMAN(0), MAN(1), ETC(2), NONE(3);
 
     private Integer gender;
@@ -11,7 +11,7 @@ enum Gender {
         this.gender = gender;
     }
 
-    public Integer getGender() {
+    public Integer getValue() {
         return gender;
     }
 
