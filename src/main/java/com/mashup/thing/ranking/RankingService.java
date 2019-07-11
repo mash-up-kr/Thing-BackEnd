@@ -25,16 +25,24 @@ public class RankingService {
 
     public ResRankingsDto getRankings(int page, FilterType filter) {
 
+        Sort sort = checkFilterType(filter);
+
         Page<Ranking> rankingPage = rankingRepository.findAllByCategoryId(
                 CategoryType.TOTAL.getPrimaryKey(),
-                PageRequest.of(page, LIST_SIZE, new Sort(Sort.Direction.ASC, filter.getFilterType())));
-
+                PageRequest.of(page, LIST_SIZE, sort));
 
         if (isRankingListEmpty(rankingPage)) {
             return new ResRankingsDto();
         }
 
         return rankingMapper.toRankingsDto(rankingPage, filter);
+    }
+
+    private Sort checkFilterType(FilterType filter) {
+        if (filter.getFilterType().equals(FilterType.TOTAL)) {
+            return new Sort(Sort.Direction.ASC, filter.getFilterType());
+        }
+        return new Sort(Sort.Direction.DESC, filter.getFilterType());
     }
 
     private Boolean isRankingListEmpty(Page<Ranking> rankingPage) {

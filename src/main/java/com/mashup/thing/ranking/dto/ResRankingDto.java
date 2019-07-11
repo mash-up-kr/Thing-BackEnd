@@ -14,6 +14,7 @@ public class ResRankingDto {
     private String subscriberCount;
     private String thumbnail;
     private String bannerImgUrl;
+    private String soaring;
 
     private ResRankingDto(Ranking ranking) {
         this.id = ranking.getId();
@@ -23,6 +24,7 @@ public class ResRankingDto {
         this.bannerImgUrl = ranking.getBannerImgUrl();
         this.viewCount = MoneyCovert.toKoreaUnit(ranking.getViewCount());
         this.subscriberCount = MoneyCovert.toKoreaUnit(ranking.getSubscriberCount());
+        this.soaring = ranking.getSoaring().toString();
     }
 
     public static ResRankingDto from(Ranking ranking) {
