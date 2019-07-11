@@ -10,3 +10,6 @@ insert into category (category_type) VALUES ('ENTERTAINMENT');
 insert into category (category_type) VALUES ('MUSIC');
 insert into category (category_type) VALUES ('COMIC');
 insert into category (category_type) VALUES ('TOTAL');
+
+
+insert into user (nick_name, uid) VALUES ('test', 'test');
