@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class RankingMapper {
     public ResRankingsDto toRankingsDto(Page<Ranking> rankingPage, FilterType filter) {
-        if (filter.getFilterType().equals(FilterType.TOTAL)) {
+        if (filter.equals(FilterType.TOTAL)) {
             return new ResRankingsDto(
                     rankingPage.get().map(ResRankingDto::from).collect(Collectors.toList()),
                     rankingPage.getNumber(),
