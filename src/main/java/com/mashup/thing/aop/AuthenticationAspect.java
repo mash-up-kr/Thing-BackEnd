@@ -22,7 +22,13 @@ public class AuthenticationAspect {
     @Pointcut("execution(public * com.mashup.thing.ranking.RankingController.*(..))")
     public void rankingController() {}
 
-    @Before(value = "rankingController()")
+    @Pointcut("execution(public * com.mashup.thing.youtuber.YouTuberController.*(..))")
+    public void youTuberController() {}
+
+    @Pointcut("youTuberController()||rankingController()")
+    public void serviceController() {}
+
+    @Before(value = "serviceController()")
     public void checkSessionValid(JoinPoint joinPoint) {
         String uid = (String)joinPoint.getArgs()[0];
         if(isNotUser(uid)) {
