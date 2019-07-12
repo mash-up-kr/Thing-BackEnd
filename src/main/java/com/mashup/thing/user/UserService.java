@@ -27,6 +27,10 @@ public class UserService {
             throw new BaseException(HttpStatus.CONFLICT);
         }
 
+        if (isNickName(reqSignUpUserDto.getNickName())) {
+            throw new BaseException(HttpStatus.CONFLICT);
+        }
+
         User user = userMapper.toUser(reqSignUpUserDto);
         userRepository.save(user);
     }
@@ -37,5 +41,9 @@ public class UserService {
 
     private Boolean isUid(String uid) {
         return userRepository.existsByUid(uid);
+    }
+
+    private Boolean isNickName(String nickName) {
+        return userRepository.existsByNickName(nickName);
     }
 }
