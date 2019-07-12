@@ -6,7 +6,7 @@ public enum CategoryType {
     BEAUTY("뷰티", 3L), KIDS("키즈", 4L),
     TALK("토크", 5L), DAILY("일상", 6L),
     GAME("게임", 7L), FOOD("푸드", 8L),
-    ENTERTAINMENT("엔터테이먼트", 9L), MUSIC("뮤직", 10L),
+    ENTERTAINMENT("엔터테인먼트", 9L), MUSIC("뮤직", 10L),
     COMIC("코믹", 11L), TOTAL("전체", 12L);
 
     private String categoryType;
