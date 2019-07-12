@@ -13,7 +13,7 @@ public class UserMapperTest {
     public void testToUser(){
         UserMapper userMapper = new UserMapper();
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
-        reqSignUpUserDto.setNickName("thing");
+        reqSignUpUserDto.setNickname("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 

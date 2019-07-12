@@ -39,7 +39,7 @@ public class UserControllerTest {
         doThrow(new BaseException(HttpStatus.CONFLICT)).when(userService).addUser(any());
 
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
-        reqSignUpUserDto.setNickName("thing");
+        reqSignUpUserDto.setNickname("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 

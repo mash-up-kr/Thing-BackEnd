@@ -29,5 +29,7 @@ public class YouTuber {
     private Long commentCount;
     private String bannerImgUrl;
     private String country;
+    private Long likeCount;
+    private Long noCount;
 
 }
