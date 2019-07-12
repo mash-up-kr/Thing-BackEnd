@@ -27,7 +27,7 @@ public class UserService {
             throw new BaseException(HttpStatus.CONFLICT);
         }
 
-        if (isNickName(reqSignUpUserDto.getNickName())) {
+        if (isNickName(reqSignUpUserDto.getNickname())) {
             throw new BaseException(HttpStatus.CONFLICT);
         }
 

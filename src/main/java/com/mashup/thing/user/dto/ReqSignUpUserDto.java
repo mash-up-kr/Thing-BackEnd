@@ -13,7 +13,7 @@ public class ReqSignUpUserDto {
     private String uid;
 
     @NotNull
-    private String nickName;
+    private String nickname;
 
     private Integer dateBirth;
 
