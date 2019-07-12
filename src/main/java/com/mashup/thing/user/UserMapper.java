@@ -29,7 +29,7 @@ public class UserMapper {
 
     public User toUser(ReqSignUpUserDto reqSignUpUserDto) {
         return new User(reqSignUpUserDto.getUid(),
-                reqSignUpUserDto.getNickName(),
+                reqSignUpUserDto.getNickname(),
                 reqSignUpUserDto.getDateBirth(),
                 reqSignUpUserDto.getGender());
     }
