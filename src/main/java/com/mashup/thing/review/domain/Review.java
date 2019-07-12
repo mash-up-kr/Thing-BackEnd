@@ -26,4 +26,8 @@ public class Review {
     private Long youTuberId;
     private Long userId;
 
+    public Boolean isOwner(Long userId) {
+        return this.userId.equals(userId);
+    }
+
 }

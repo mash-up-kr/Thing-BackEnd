@@ -1,4 +1,4 @@
-package com.mashup.thing.youtuber.dto;
+package com.mashup.thing.endpage.dto;
 
 import com.mashup.thing.video.domain.Video;
 import lombok.Getter;
