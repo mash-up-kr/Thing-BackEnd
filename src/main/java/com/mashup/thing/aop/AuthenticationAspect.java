@@ -22,10 +22,10 @@ public class AuthenticationAspect {
     @Pointcut("execution(public * com.mashup.thing.ranking.RankingController.*(..))")
     public void rankingController() {}
 
-    @Pointcut("execution(public * com.mashup.thing.youtuber.YouTuberController.*(..))")
-    public void youTuberController() {}
+    @Pointcut("execution(public * com.mashup.thing.endpage.EndPageController.*(..))")
+    public void endPageController() {}
 
-    @Pointcut("youTuberController()||rankingController()")
+    @Pointcut("endPageController()||rankingController()")
     public void serviceController() {}
 
     @Before(value = "serviceController()")

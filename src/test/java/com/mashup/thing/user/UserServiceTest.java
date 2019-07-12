@@ -38,7 +38,7 @@ public class UserServiceTest {
         expectedException.expect(hasProperty("code", is(HttpStatus.CONFLICT)));
 
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
-        reqSignUpUserDto.setNickName("thing");
+        reqSignUpUserDto.setNickname("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 

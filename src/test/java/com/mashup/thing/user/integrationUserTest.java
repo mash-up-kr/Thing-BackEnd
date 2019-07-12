@@ -26,7 +26,7 @@ public class integrationUserTest {
     @Before
     public void testSignUpUser() {
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
-        reqSignUpUserDto.setNickName("thing");
+        reqSignUpUserDto.setNickname("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 
@@ -38,7 +38,7 @@ public class integrationUserTest {
     @Test
     public void testSignUpConflictUser() {
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
-        reqSignUpUserDto.setNickName("thing");
+        reqSignUpUserDto.setNickname("thing");
         reqSignUpUserDto.setUid("123");
         reqSignUpUserDto.setDateBirth(1990);
 

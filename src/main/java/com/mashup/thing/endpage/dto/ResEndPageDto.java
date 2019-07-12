@@ -1,4 +1,4 @@
-package com.mashup.thing.youtuber.dto;
+package com.mashup.thing.endpage.dto;
 
 import lombok.Getter;
 
@@ -17,6 +17,8 @@ public class ResEndPageDto {
     private String thumbnail;
     private Long subscriberCount;
     private Long viewCount;
+    private Long likeReviewCount;
+    private Long noReviewCount;
     private List<ResEndPageReviewDto> likeReviews;
     private List<ResEndPageReviewDto> noReviews;
     private List<ResEndPageVideoDto> videos;
@@ -25,6 +27,7 @@ public class ResEndPageDto {
                          String channelId, String description,
                          LocalDateTime publishedAt, Long subscriberCount,
                          String thumbnail, Long viewCount,
+                         Long likeReviewCount, Long noReviewCount,
                          List<ResEndPageVideoDto> resEndPageVideos,
                          List<ResEndPageReviewDto> resEndPageLikeReviews,
                          List<ResEndPageReviewDto> resEndPageNoReviews) {
@@ -37,6 +40,8 @@ public class ResEndPageDto {
         this.subscriberCount = subscriberCount;
         this.thumbnail = thumbnail;
         this.viewCount = viewCount;
+        this.likeReviewCount = likeReviewCount;
+        this.noReviewCount = noReviewCount;
         this.likeReviews = resEndPageLikeReviews;
         this.noReviews = resEndPageNoReviews;
         this.videos = resEndPageVideos;
