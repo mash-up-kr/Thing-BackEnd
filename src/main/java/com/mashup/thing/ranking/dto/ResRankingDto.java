@@ -17,7 +17,7 @@ public class ResRankingDto {
     private String soaring;
 
     private ResRankingDto(Ranking ranking) {
-        this.id = ranking.getId();
+        this.id = ranking.getYouTuberId();
         this.name = ranking.getName();
         this.ranking = ranking.getRanking();
         this.thumbnail = ranking.getThumbnail();
