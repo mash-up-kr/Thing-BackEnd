@@ -1,8 +1,9 @@
-package com.mashup.thing.user;
+package com.mashup.thing.user.service;
 
 import com.mashup.thing.exception.BaseException;
 import com.mashup.thing.search.SearchRepository;
 import com.mashup.thing.search.domain.Search;
+import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ResSignInDto;
 import org.springframework.http.HttpStatus;

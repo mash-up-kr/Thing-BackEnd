@@ -3,6 +3,7 @@ package com.mashup.thing.user;
 import com.mashup.thing.user.domain.Gender;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
+import com.mashup.thing.user.service.UserMapper;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

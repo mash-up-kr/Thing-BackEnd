@@ -1,3 +1,21 @@
+cloud:
+  aws:
+    region:
+      static: ${REGION_NAME}
+    s3:
+      bucket: ${BUCKET_NAME}
+    credentials:
+      accessKey: ${ACCESS_KEY}
+      secretKey: ${SECRETE_KEY}
+    stack:
+      auto: false
+
+spring:
+  servlet:
+    multipart:
+      location: ${MULTIPART_LOCATION}
+---
+
 spring:
   profiles: local
   datasource:
