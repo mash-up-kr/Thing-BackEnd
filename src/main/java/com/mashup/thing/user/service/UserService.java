@@ -47,8 +47,8 @@ public class UserService {
         return signInUserService.signIn(uid);
     }
 
-    public ResUpdateDto updateUser(@Valid ReqUpdateUserDto reqSignUpUserDto, String uid) {
-       return updateUserService.update(reqSignUpUserDto, uid);
+    public ResUpdateDto updateUser(@Valid ReqUpdateUserDto reqSignUpUserDto, Long userId) {
+       return updateUserService.update(reqSignUpUserDto, userId);
     }
 
     private Boolean isUid(String uid) {
