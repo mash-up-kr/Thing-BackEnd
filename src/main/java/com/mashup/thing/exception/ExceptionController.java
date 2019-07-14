@@ -1,5 +1,6 @@
 package com.mashup.thing.exception;
 
+import com.mashup.thing.exception.dto.ResErrorDto;
 import com.mashup.thing.exception.dto.ResExceptionDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class ExceptionController {
 
-    private final ExceptionMapper exceptionMapper;
-
     @ExceptionHandler(value = BaseException.class)
     public ResponseEntity<ResExceptionDto> restExceptionHandler(HttpServletRequest req, BaseException exception) throws RuntimeException {
         log.error("Method:{} - RequestUrl:{} - Status:{} - Msg:{}",
@@ -28,13 +27,13 @@ public class ExceptionController {
         switch (exception.getErrorModel().getHttpStatus()) {
             case FORBIDDEN:
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                        .body(exceptionMapper.toResExceptionDto(exception.getErrorModel()));
+                        .body(toResExceptionDto(exception.getErrorModel()));
             case BAD_REQUEST:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(exceptionMapper.toResExceptionDto(exception.getErrorModel()));
+                        .body(toResExceptionDto(exception.getErrorModel()));
             case CONFLICT:
                 return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body(exceptionMapper.toResExceptionDto(exception.getErrorModel()));
+                        .body(toResExceptionDto(exception.getErrorModel()));
             default:
                 throw new RuntimeException();
         }
@@ -47,5 +46,18 @@ public class ExceptionController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
     }
 
+
+    private ResExceptionDto toResExceptionDto(ErrorModel errorModel) {
+        return ResExceptionDto.builder()
+                .error(toResErrorDto(errorModel))
+                .build();
+    }
+
+    private ResErrorDto toResErrorDto(ErrorModel errorModel) {
+        return ResErrorDto.builder()
+                .code(errorModel.getCode())
+                .massage(errorModel.getMassage())
+                .build();
+    }
 
 }
