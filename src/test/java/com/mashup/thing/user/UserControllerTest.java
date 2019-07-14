@@ -1,7 +1,7 @@
 package com.mashup.thing.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.user.ExistUidException;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import com.mashup.thing.user.service.UserService;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,7 +35,7 @@ public class UserControllerTest {
 
     @Test
     public void TestConflictAddUser() throws Exception {
-        doThrow(new BaseException(HttpStatus.CONFLICT)).when(userService).addUser(any());
+        doThrow(new ExistUidException()).when(userService).addUser(any());
 
         ReqSignUpUserDto reqSignUpUserDto = new ReqSignUpUserDto();
         reqSignUpUserDto.setNickname("thing");

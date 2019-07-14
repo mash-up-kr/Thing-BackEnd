@@ -14,6 +14,7 @@ spring:
   servlet:
     multipart:
       location: ${MULTIPART_LOCATION}
+
 ---
 
 spring:
@@ -75,3 +76,4 @@ spring:
     properties:
       hibernate:
         format_sql: true
+

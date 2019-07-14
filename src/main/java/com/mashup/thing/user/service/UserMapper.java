@@ -17,7 +17,8 @@ public class UserMapper {
     public ResSignInDto toResSignInDto(User user, List<Search> searches) {
         return new ResSignInDto(user.getId(),
                 user.getNickName(),
-                user.getUid(), user.getDateBirth(),
+                user.getUid(),
+                user.getDateBirth(),
                 Optional.ofNullable(user.getProfileUrl()).orElse(""),
                 user.getGender().toString(),
                 searches.stream().map(ResSearchDto::from).collect(Collectors.toList()),

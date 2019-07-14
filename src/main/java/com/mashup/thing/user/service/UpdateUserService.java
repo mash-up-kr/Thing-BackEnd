@@ -27,32 +27,31 @@ public class UpdateUserService {
     }
 
     @Transactional
-    public ResUpdateDto update(ReqUpdateUserDto reqSignUpUserDto, Long userId) {
+    public ResUpdateDto update(ReqUpdateUserDto reqUpdateUserDto, Long userId) {
 
         User user = userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
 
-        if (user.isNotSameNickname(reqSignUpUserDto.getNickname())) {
-            differentUserSameNickname(reqSignUpUserDto.getNickname());
-            user.updateNickname(reqSignUpUserDto.getNickname());
+        if (user.isNotSameNickname(reqUpdateUserDto.getNickname())) {
+            isSameDifferentUserNickname(reqUpdateUserDto.getNickname());
+            user.updateNickname(reqUpdateUserDto.getNickname());
         }
 
-        if (isImgFile(reqSignUpUserDto.getImgFile())) {
-            String imgUrl = s3Uploader.upload(reqSignUpUserDto.getImgFile(), user.getUid());
-            reqSignUpUserDto.setImgUrl(imgUrl);
+        if (isImgFile(reqUpdateUserDto.getImgFile())) {
+            String imgUrl = s3Uploader.upload(reqUpdateUserDto.getImgFile(), user.getUid());
+            reqUpdateUserDto.setImgUrl(imgUrl);
         }
 
-        if (isNoneImgUrl(reqSignUpUserDto.getImgUrl())) {
+        if (isNoneImgUrl(reqUpdateUserDto.getImgUrl())) {
             user.removeImg();
         }
-
-        user.updateInfo(reqSignUpUserDto.getDateBirth(),
-                reqSignUpUserDto.getGender(),
-                reqSignUpUserDto.getImgUrl());
+        user.updateInfo(reqUpdateUserDto.getDateBirth(),
+                reqUpdateUserDto.getGender(),
+                reqUpdateUserDto.getImgUrl());
 
         return userMapper.toResUpdateDto(user);
     }
 
-    private void differentUserSameNickname(String nickname) {
+    private void isSameDifferentUserNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
             throw new ExistNicknameException();
         }
