@@ -1,12 +1,11 @@
 package com.mashup.thing.user.service;
 
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.user.NotFoundUserException;
 import com.mashup.thing.search.SearchRepository;
 import com.mashup.thing.search.domain.Search;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ResSignInDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ public class SignInUserService {
     }
 
     public ResSignInDto signIn(String uid) {
-        User user = userRepository.findByUid(uid).orElseThrow(() -> new BaseException(HttpStatus.BAD_REQUEST));
+        User user = userRepository.findByUid(uid).orElseThrow(NotFoundUserException::new);
         List<Search> searches = searchRepository.findByUserId(user.getId()).orElse(new ArrayList<>());
         return userMapper.toResSignInDto(user, searches);
     }

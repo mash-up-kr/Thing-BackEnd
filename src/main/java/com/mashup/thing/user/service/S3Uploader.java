@@ -3,11 +3,10 @@ package com.mashup.thing.user.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.s3.CovertFailException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,10 +28,10 @@ public class S3Uploader {
     public String upload(MultipartFile multipartFile, String uid) {
         try {
             File uploadFile = convert(multipartFile)
-                    .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
+                    .orElseThrow(CovertFailException::new);
             return upload(uploadFile, uid);
         } catch (IOException e) {
-            throw new BaseException(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new CovertFailException();
         }
     }
 
