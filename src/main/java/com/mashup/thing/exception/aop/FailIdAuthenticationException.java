@@ -4,21 +4,20 @@ import com.mashup.thing.exception.BaseException;
 import com.mashup.thing.exception.ErrorModel;
 import org.springframework.http.HttpStatus;
 
-public class FailAuthenticationException extends BaseException {
-
-    public FailAuthenticationException() {
+public class FailIdAuthenticationException extends BaseException {
+    public FailIdAuthenticationException() {
         this(HttpStatus.FORBIDDEN);
     }
 
-    public FailAuthenticationException(HttpStatus httpStatus) {
-        this(4301, httpStatus);
+    public FailIdAuthenticationException(HttpStatus httpStatus) {
+        this(4302, httpStatus);
     }
 
-    public FailAuthenticationException(int code, HttpStatus httpStatus) {
+    public FailIdAuthenticationException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
                 .code(code)
                 .httpStatus(httpStatus)
-                .massage("Fail Authentication - Invalid Uid")
+                .massage("Fail Authentication - Invalid Id")
                 .build());
     }
 }

@@ -16,9 +16,9 @@ public class CovertFailException extends BaseException {
 
     public CovertFailException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Covert Fail File")
+                .massage("Covert Fail File")
                 .build());
     }
 }

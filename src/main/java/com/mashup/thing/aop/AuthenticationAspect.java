@@ -1,7 +1,9 @@
 package com.mashup.thing.aop;
 
 import com.mashup.thing.exception.aop.FailAuthenticationException;
+import com.mashup.thing.exception.aop.FailIdAuthenticationException;
 import com.mashup.thing.user.UserRepository;
+import com.mashup.thing.user.domain.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -27,10 +29,10 @@ public class AuthenticationAspect {
     }
 
     @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
-    public void updateUser() {
+    public void userController() {
     }
 
-    @Pointcut("endPageController()||rankingController()||updateUser()")
+    @Pointcut("endPageController()||rankingController()")
     public void serviceController() {
     }
 
@@ -40,6 +42,18 @@ public class AuthenticationAspect {
 
         if (isNotUser(uid)) {
             throw new FailAuthenticationException();
+        }
+    }
+
+    @Before(value = "userController()")
+    public void checkUserValid(JoinPoint joinPoint) {
+        String uid = (String) joinPoint.getArgs()[0];
+        Long userId = (Long) joinPoint.getArgs()[1];
+
+        User user = userRepository.findByUid(uid).orElseThrow(FailAuthenticationException::new);
+
+        if (user.isNotSameId(userId)) {
+            throw new FailIdAuthenticationException();
         }
     }
 

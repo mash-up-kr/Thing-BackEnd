@@ -10,14 +10,14 @@ public class NotFoundCategoryException extends BaseException {
     }
 
     public NotFoundCategoryException(HttpStatus httpStatus) {
-        this(4005, httpStatus);
+        this(4001, httpStatus);
     }
 
     public NotFoundCategoryException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Not Found Category - Invalid CategoryId")
+                .massage("Not Found Category - Invalid CategoryId")
                 .build());
     }
 
