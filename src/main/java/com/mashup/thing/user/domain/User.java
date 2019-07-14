@@ -23,6 +23,8 @@ public class User {
 
     private Integer dateBirth;
 
+    @Lob
+    @Column(name="profile_url", length=512)
     private String profileUrl;
 
     @Enumerated(EnumType.STRING)
