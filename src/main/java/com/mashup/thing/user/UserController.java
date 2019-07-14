@@ -58,18 +58,19 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "USER 업데이트 성공"),
             @ApiResponse(code = 400, message = "NickName - NULL"),
-            @ApiResponse(code = 409, message = "중복된 닉네임 또는 아이디"),
+            @ApiResponse(code = 409, message = "중복된 닉네임"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
-    @PatchMapping("/v1/users")
+    @PatchMapping("/v1/users/{userId}")
     public ResponseEntity<ResUpdateDto> updateUser(@RequestHeader(value = "uid") String uid,
+                                                   @PathVariable(value = "userId") Long userId,
                                                    @ModelAttribute @Valid ReqUpdateUserDto reqSignUpUserDto,
                                                    BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new BaseException(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(reqSignUpUserDto, uid));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(reqSignUpUserDto, userId));
     }
 
 }

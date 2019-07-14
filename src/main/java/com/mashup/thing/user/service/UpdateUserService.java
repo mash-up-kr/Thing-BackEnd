@@ -27,9 +27,9 @@ public class UpdateUserService {
     }
 
     @Transactional
-    public ResUpdateDto update(ReqUpdateUserDto reqSignUpUserDto, String uid) {
+    public ResUpdateDto update(ReqUpdateUserDto reqSignUpUserDto, Long userId) {
 
-        User user = userRepository.findByUid(uid).orElseThrow(() -> new BaseException(HttpStatus.BAD_REQUEST));
+        User user = userRepository.findById(userId).orElseThrow(() -> new BaseException(HttpStatus.BAD_REQUEST));
 
         if (user.isNotSameNickname(reqSignUpUserDto.getNickname())) {
             differentUserSameNickname(reqSignUpUserDto.getNickname());
@@ -54,7 +54,7 @@ public class UpdateUserService {
 
     private void differentUserSameNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
-            throw new BaseException(HttpStatus.BAD_REQUEST);
+            throw new BaseException(HttpStatus.CONFLICT);
         }
     }
 
