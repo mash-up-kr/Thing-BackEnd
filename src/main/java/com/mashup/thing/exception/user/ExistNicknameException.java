@@ -11,14 +11,14 @@ public class ExistNicknameException extends BaseException {
     }
 
     public ExistNicknameException(HttpStatus httpStatus) {
-        this(4003, httpStatus);
+        this(4901, httpStatus);
     }
 
     public ExistNicknameException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Exist Nickname")
+                .massage("Exist Nickname")
                 .build());
     }
 }

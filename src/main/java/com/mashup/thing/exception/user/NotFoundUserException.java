@@ -16,9 +16,9 @@ public class NotFoundUserException extends BaseException {
 
     public NotFoundUserException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Not Found User - Invalid Id or Uid")
+                .massage("Not Found User - Invalid Id or Uid")
                 .build());
     }
 }

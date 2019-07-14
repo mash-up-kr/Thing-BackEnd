@@ -8,14 +8,14 @@ public class RequestNullFieldException extends BaseException {
     }
 
     public RequestNullFieldException(HttpStatus httpStatus) {
-        this(4006, httpStatus);
+        this(4004, httpStatus);
     }
 
     public RequestNullFieldException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Request Null Field - Check Request Field")
+                .massage("Request Null Field - Check Request Field")
                 .build());
     }
 }

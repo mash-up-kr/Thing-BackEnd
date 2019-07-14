@@ -11,14 +11,14 @@ public class ExistUidException extends BaseException {
     }
 
     public ExistUidException(HttpStatus httpStatus) {
-        this(4004, httpStatus);
+        this(4902, httpStatus);
     }
 
     public ExistUidException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Exist Uid")
+                .massage("Exist Uid")
                 .build());
     }
 }

@@ -54,6 +54,10 @@ public class User {
     public Boolean isNotSameNickname(String nickName) {
         return !this.nickName.equals(nickName);
     }
+
+    public Boolean isNotSameId(Long id) {
+        return !this.id.equals(id);
+    }
 }
 
 
