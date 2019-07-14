@@ -1,24 +1,32 @@
-package com.mashup.thing.user;
+package com.mashup.thing.user.service;
 
 import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
+import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.dto.ResSignInDto;
+import com.mashup.thing.user.dto.ResUpdateDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final SignInUserService signInUserService;
+    private final UpdateUserService updateUserService;
     private final UserMapper userMapper;
 
     public UserService(UserRepository userRepository,
                        SignInUserService signInUserService,
+                       UpdateUserService updateUserService,
                        UserMapper userMapper) {
         this.userRepository = userRepository;
         this.signInUserService = signInUserService;
+        this.updateUserService = updateUserService;
         this.userMapper = userMapper;
     }
 
@@ -39,6 +47,10 @@ public class UserService {
         return signInUserService.signIn(uid);
     }
 
+    public ResUpdateDto updateUser(@Valid ReqUpdateUserDto reqSignUpUserDto, String uid) {
+       return updateUserService.update(reqSignUpUserDto, uid);
+    }
+
     private Boolean isUid(String uid) {
         return userRepository.existsByUid(uid);
     }
@@ -46,4 +58,6 @@ public class UserService {
     private Boolean isNickName(String nickName) {
         return userRepository.existsByNickName(nickName);
     }
+
+
 }

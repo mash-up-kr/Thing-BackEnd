@@ -1,12 +1,9 @@
-package com.mashup.thing.user;
+package com.mashup.thing.user.service;
 
 import com.mashup.thing.category.domain.CategoryType;
 import com.mashup.thing.search.domain.Search;
 import com.mashup.thing.user.domain.User;
-import com.mashup.thing.user.dto.ReqSignUpUserDto;
-import com.mashup.thing.user.dto.ResCategoryDto;
-import com.mashup.thing.user.dto.ResSearchDto;
-import com.mashup.thing.user.dto.ResSignInDto;
+import com.mashup.thing.user.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -32,5 +29,13 @@ public class UserMapper {
                 reqSignUpUserDto.getNickname(),
                 reqSignUpUserDto.getDateBirth(),
                 reqSignUpUserDto.getGender());
+    }
+
+    public ResUpdateDto toResUpdateDto(User user) {
+        return new ResUpdateDto(user.getId(),
+                Optional.ofNullable(user.getDateBirth()).orElse(0),
+                user.getGender().toString(),
+                user.getNickName(),
+                Optional.ofNullable(user.getProfileUrl()).orElse(""));
     }
 }

@@ -13,3 +13,4 @@ insert into category (category_type) VALUES ('TOTAL');
 
 
 insert into user (nick_name, uid) VALUES ('test', 'test');
+insert into user (nick_name, uid) VALUES ('tttt', 'test2');

@@ -20,21 +20,28 @@ public class AuthenticationAspect {
     }
 
     @Pointcut("execution(public * com.mashup.thing.ranking.RankingController.*(..))")
-    public void rankingController() {}
+    public void rankingController() {
+    }
 
     @Pointcut("execution(public * com.mashup.thing.endpage.EndPageController.*(..))")
-    public void endPageController() {}
+    public void endPageController() {
+    }
 
-    @Pointcut("endPageController()||rankingController()")
-    public void serviceController() {}
+    @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
+    public void updateUser() {
+    }
+
+    @Pointcut("endPageController()||rankingController()||updateUser()")
+    public void serviceController() {
+    }
 
     @Before(value = "serviceController()")
     public void checkSessionValid(JoinPoint joinPoint) {
-        String uid = (String)joinPoint.getArgs()[0];
-        if(isNotUser(uid)) {
+        String uid = (String) joinPoint.getArgs()[0];
+
+        if (isNotUser(uid)) {
             throw new BaseException(HttpStatus.BAD_REQUEST);
         }
-
     }
 
     private Boolean isNotUser(String uid) {

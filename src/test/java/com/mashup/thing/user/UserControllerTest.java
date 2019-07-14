@@ -3,6 +3,7 @@ package com.mashup.thing.user;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashup.thing.exception.BaseException;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
+import com.mashup.thing.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
