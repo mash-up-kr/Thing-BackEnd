@@ -1,13 +1,12 @@
 package com.mashup.thing.ranking;
 
 import com.mashup.thing.category.CategoryRepository;
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.category.NotFoundCategoryException;
 import com.mashup.thing.ranking.domain.Ranking;
 import com.mashup.thing.ranking.dto.ResRankingsDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,7 +31,7 @@ public class CategoryRankingService {
     public ResRankingsDto getRankings(Integer page, FilterType filter, Long categoryId) {
 
         if(isCategory(categoryId)) {
-            throw new BaseException(HttpStatus.BAD_REQUEST);
+            throw new NotFoundCategoryException();
         }
 
         Sort sort = checkFilterType(filter);

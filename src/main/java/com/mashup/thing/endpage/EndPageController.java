@@ -24,6 +24,7 @@ public class EndPageController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "End Page 조회 성공"),
             @ApiResponse(code = 400, message = "YouTuberId - NULL or 존재하지 않는 id"),
+            @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
     @GetMapping("/v1/youtubers/{youTuberId}")

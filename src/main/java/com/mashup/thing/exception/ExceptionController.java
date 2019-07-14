@@ -13,24 +13,30 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionController {
 
     @ExceptionHandler(value = BaseException.class)
-    public ResponseEntity<String> restExceptionHandler(HttpServletRequest req, BaseException exception) throws RuntimeException {
-        log.error("Method:{} - RequestUrl:{} - Status:{}", req.getMethod(), req.getRequestURI(), exception.getCode());
+    public ResponseEntity<ErrorModel> restExceptionHandler(HttpServletRequest req, BaseException exception) throws RuntimeException {
+        log.error("Method:{} - RequestUrl:{} - Status:{} - Msg:{}",
+                req.getMethod(),
+                req.getRequestURI(),
+                exception.getErrorModel().getHttpStatus(),
+                exception.getErrorModel().getMsg());
 
-        switch (exception.getCode()) {
+        switch (exception.getErrorModel().getHttpStatus()) {
+            case FORBIDDEN:
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exception.getErrorModel());
             case BAD_REQUEST:
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("잘 못된 요청");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getErrorModel());
             case CONFLICT:
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("중복(충돌)");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getErrorModel());
             default:
                 throw new RuntimeException();
         }
     }
 
     @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<String> unhandledExceptionHandler(RuntimeException exception) {
+    public ResponseEntity<Exception> unhandledExceptionHandler(RuntimeException exception) {
         log.error(exception.getMessage());
         exception.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception);
     }
 
 }

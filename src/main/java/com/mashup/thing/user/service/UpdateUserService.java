@@ -1,11 +1,11 @@
 package com.mashup.thing.user.service;
 
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.user.ExistNicknameException;
+import com.mashup.thing.exception.user.NotFoundUserException;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.dto.ResUpdateDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +29,7 @@ public class UpdateUserService {
     @Transactional
     public ResUpdateDto update(ReqUpdateUserDto reqSignUpUserDto, Long userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new BaseException(HttpStatus.BAD_REQUEST));
+        User user = userRepository.findById(userId).orElseThrow(NotFoundUserException::new);
 
         if (user.isNotSameNickname(reqSignUpUserDto.getNickname())) {
             differentUserSameNickname(reqSignUpUserDto.getNickname());
@@ -54,7 +54,7 @@ public class UpdateUserService {
 
     private void differentUserSameNickname(String nickname) {
         if (userRepository.existsByNickName(nickname)) {
-            throw new BaseException(HttpStatus.CONFLICT);
+            throw new ExistNicknameException();
         }
     }
 

@@ -1,13 +1,13 @@
 package com.mashup.thing.user.service;
 
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.user.ExistNicknameException;
+import com.mashup.thing.exception.user.ExistUidException;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.dto.ResSignInDto;
 import com.mashup.thing.user.dto.ResUpdateDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -32,11 +32,11 @@ public class UserService {
 
     public void addUser(ReqSignUpUserDto reqSignUpUserDto) {
         if (isUid(reqSignUpUserDto.getUid())) {
-            throw new BaseException(HttpStatus.CONFLICT);
+            throw new ExistUidException();
         }
 
         if (isNickName(reqSignUpUserDto.getNickname())) {
-            throw new BaseException(HttpStatus.CONFLICT);
+            throw new ExistNicknameException();
         }
 
         User user = userMapper.toUser(reqSignUpUserDto);

@@ -21,7 +21,8 @@ public class RankingController {
     @ApiOperation(value = "GET RANKING LIST", notes = "GET RANKING LIST API - Page(Request PageIndex) / Page StartIndex - 0")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "RANKING 조회 성공"),
-            @ApiResponse(code = 400, message = "page - NULL"),
+            @ApiResponse(code = 400, message = "존재 하지 않는 카테고리"),
+            @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
     @GetMapping("/v1/rankings")
@@ -35,7 +36,8 @@ public class RankingController {
             "\n Category - 지식(1), 스포츠(2), 뷰티(3), 키즈(4), 토크(5), 일상(6), 게임(7), 푸드(8), 엔터테이먼트(9), 뮤직(10), 코믹(11)")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "CATEGORY RANKING 조회 성공"),
-            @ApiResponse(code = 400, message = "page - NULL"),
+            @ApiResponse(code = 400, message = "존재 하지 않는 카테고리"),
+            @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
     @GetMapping("/v1/categories/{categoryId}/rankings")
