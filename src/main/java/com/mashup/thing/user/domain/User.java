@@ -34,6 +34,24 @@ public class User {
         this.dateBirth = dateBirth;
         this.gender = Gender.from(gender);
     }
+
+    public void removeImg() {
+        this.profileUrl = null;
+    }
+
+    public void updateNickname(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public void updateInfo(Integer dateBirth, Integer gender, String profileUrl) {
+        this.dateBirth = dateBirth;
+        this.gender = Gender.from(gender);
+        this.profileUrl = profileUrl;
+    }
+
+    public Boolean isNotSameNickname(String nickName) {
+        return !this.nickName.equals(nickName);
+    }
 }
 
 

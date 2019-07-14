@@ -2,7 +2,10 @@ package com.mashup.thing.user;
 
 import com.mashup.thing.exception.BaseException;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
+import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.dto.ResSignInDto;
+import com.mashup.thing.user.dto.ResUpdateDto;
+import com.mashup.thing.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -49,6 +52,24 @@ public class UserController {
         }
         userService.addUser(reqSignUpUserDto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @ApiOperation(value = "USER UPDATE", notes = "USER UPDATE API - Gender(Enum) : WOMAN - 0, MAN - 1, ETC - 2")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "USER 업데이트 성공"),
+            @ApiResponse(code = 400, message = "NickName - NULL"),
+            @ApiResponse(code = 409, message = "중복된 닉네임 또는 아이디"),
+            @ApiResponse(code = 500, message = "서버 에러")
+    })
+    @PatchMapping("/v1/users")
+    public ResponseEntity<ResUpdateDto> updateUser(@RequestHeader(value = "uid") String uid,
+                                                   @ModelAttribute @Valid ReqUpdateUserDto reqSignUpUserDto,
+                                                   BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new BaseException(HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(reqSignUpUserDto, uid));
     }
 
 }
