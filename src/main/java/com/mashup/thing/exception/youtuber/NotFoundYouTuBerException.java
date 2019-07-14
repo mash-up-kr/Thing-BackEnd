@@ -10,14 +10,14 @@ public class NotFoundYouTuBerException extends BaseException {
     }
 
     public NotFoundYouTuBerException(HttpStatus httpStatus) {
-        this(4007, httpStatus);
+        this(4003, httpStatus);
     }
 
     public NotFoundYouTuBerException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
-                .errorCode(code)
+                .code(code)
                 .httpStatus(httpStatus)
-                .msg("Not Found YouTuber - Invalid YouTuberId")
+                .massage("Not Found YouTuber - Invalid YouTuberId")
                 .build());
     }
 
