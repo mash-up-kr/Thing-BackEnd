@@ -1,6 +1,6 @@
 package com.mashup.thing.user;
 
-import com.mashup.thing.exception.BaseException;
+import com.mashup.thing.exception.RequestNullFieldException;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.dto.ResSignInDto;
@@ -48,7 +48,7 @@ public class UserController {
             , BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            throw new BaseException(HttpStatus.BAD_REQUEST);
+            throw new RequestNullFieldException();
         }
         userService.addUser(reqSignUpUserDto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -57,6 +57,7 @@ public class UserController {
     @ApiOperation(value = "USER UPDATE", notes = "USER UPDATE API - Gender(Enum) : WOMAN - 0, MAN - 1, ETC - 2")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "USER 업데이트 성공"),
+            @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 400, message = "NickName - NULL"),
             @ApiResponse(code = 409, message = "중복된 닉네임"),
             @ApiResponse(code = 500, message = "서버 에러")
@@ -68,7 +69,7 @@ public class UserController {
                                                    BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            throw new BaseException(HttpStatus.BAD_REQUEST);
+            throw new RequestNullFieldException();
         }
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(reqSignUpUserDto, userId));
     }
