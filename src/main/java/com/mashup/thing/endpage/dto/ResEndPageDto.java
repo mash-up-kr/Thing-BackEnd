@@ -1,11 +1,13 @@
 package com.mashup.thing.endpage.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Builder
 public class ResEndPageDto {
 
     private Long id;
@@ -23,27 +25,4 @@ public class ResEndPageDto {
     private List<ResEndPageReviewDto> noReviews;
     private List<ResEndPageVideoDto> videos;
 
-    public ResEndPageDto(Long id, String name, String bannerImgUrl,
-                         String channelId, String description,
-                         LocalDateTime publishedAt, Long subscriberCount,
-                         String thumbnail, Long viewCount,
-                         Long likeReviewCount, Long noReviewCount,
-                         List<ResEndPageVideoDto> resEndPageVideos,
-                         List<ResEndPageReviewDto> resEndPageLikeReviews,
-                         List<ResEndPageReviewDto> resEndPageNoReviews) {
-        this.id = id;
-        this.name = name;
-        this.bannerImgUrl = bannerImgUrl;
-        this.channelId = channelId;
-        this.description = description;
-        this.publishedAt = publishedAt;
-        this.subscriberCount = subscriberCount;
-        this.thumbnail = thumbnail;
-        this.viewCount = viewCount;
-        this.likeReviewCount = likeReviewCount;
-        this.noReviewCount = noReviewCount;
-        this.likeReviews = resEndPageLikeReviews;
-        this.noReviews = resEndPageNoReviews;
-        this.videos = resEndPageVideos;
-    }
 }

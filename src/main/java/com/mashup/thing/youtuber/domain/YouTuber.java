@@ -32,4 +32,11 @@ public class YouTuber {
     private Long likeCount;
     private Long noCount;
 
+    public void plusLikeReviewCount() {
+        likeCount++;
+    }
+
+    public void plusNoReviewCount() {
+        noCount++;
+    }
 }

@@ -1,11 +1,13 @@
 package com.mashup.thing.user.dto;
 
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
+@Builder
 public class ResSignInDto {
 
     private Long id;
@@ -17,17 +19,4 @@ public class ResSignInDto {
     private List<ResSearchDto> searches;
     private List<ResCategoryDto> categories;
 
-
-    public ResSignInDto(Long id, String nickName, String uid,
-                        Integer dateBirth, String profileUrl, String gender,
-                        List<ResSearchDto> resSearches, List<ResCategoryDto> resCategories) {
-        this.id = id;
-        this.nickName = nickName;
-        this.uid = uid;
-        this.dateBirth = dateBirth;
-        this.profileUrl = profileUrl;
-        this.gender = gender;
-        this.searches = resSearches;
-        this.categories = resCategories;
-    }
 }

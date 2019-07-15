@@ -2,6 +2,7 @@ package com.mashup.thing.aop;
 
 import com.mashup.thing.exception.aop.FailAuthenticationException;
 import com.mashup.thing.exception.aop.FailIdAuthenticationException;
+import com.mashup.thing.review.dto.ReqWriteReviewDto;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import org.aspectj.lang.JoinPoint;
@@ -28,16 +29,12 @@ public class AuthenticationAspect {
     public void endPageController() {
     }
 
-    @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
-    public void userController() {
-    }
-
     @Pointcut("endPageController()||rankingController()")
     public void serviceController() {
     }
 
     @Before(value = "serviceController()")
-    public void checkSessionValid(JoinPoint joinPoint) {
+    public void checkUidValid(JoinPoint joinPoint) {
         String uid = (String) joinPoint.getArgs()[0];
 
         if (isNotUser(uid)) {
@@ -45,13 +42,24 @@ public class AuthenticationAspect {
         }
     }
 
-    @Before(value = "userController()")
-    public void checkUserValid(JoinPoint joinPoint) {
+    @Before("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
+    public void checkUpdateUserServiceValid(JoinPoint joinPoint) {
         String uid = (String) joinPoint.getArgs()[0];
         Long userId = (Long) joinPoint.getArgs()[1];
 
-        User user = userRepository.findByUid(uid).orElseThrow(FailAuthenticationException::new);
+        validate(uid, userId);
+    }
 
+    @Before("execution(public * com.mashup.thing.review.ReviewController.*(..))")
+    public void checkReviewServiceValid(JoinPoint joinPoint) {
+        String uid = (String) joinPoint.getArgs()[0];
+        ReqWriteReviewDto reqWriteReviewDto = (ReqWriteReviewDto) joinPoint.getArgs()[2];
+
+        validate(uid, reqWriteReviewDto.getUserId());
+    }
+
+    private void validate(String uid, Long userId) {
+        User user = userRepository.findByUid(uid).orElseThrow(FailAuthenticationException::new);
         if (user.isNotSameId(userId)) {
             throw new FailIdAuthenticationException();
         }
