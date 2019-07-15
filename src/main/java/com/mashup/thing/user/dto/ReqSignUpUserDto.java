@@ -11,11 +11,8 @@ public class ReqSignUpUserDto {
 
     @NotNull
     private String uid;
-
     @NotNull
     private String nickname;
-
     private Integer dateBirth;
-
     private Integer gender;
 }
