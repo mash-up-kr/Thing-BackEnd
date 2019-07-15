@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -30,7 +31,7 @@ public class CategoryRankingService {
 
     public ResRankingsDto getRankings(Integer page, FilterType filter, Long categoryId) {
 
-        if(isCategory(categoryId)) {
+        if (isCategory(categoryId)) {
             throw new NotFoundCategoryException();
         }
 
@@ -40,7 +41,7 @@ public class CategoryRankingService {
                 categoryId, PageRequest.of(page, LIST_SIZE, sort));
 
         if (isRankingListEmpty(rankingPage)) {
-            return new ResRankingsDto();
+            return ResRankingsDto.builder().rankings(new ArrayList<>()).build();
         }
 
         return rankingMapper.toRankingsDto(rankingPage, filter);

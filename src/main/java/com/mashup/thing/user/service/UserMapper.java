@@ -15,14 +15,26 @@ import java.util.stream.Collectors;
 public class UserMapper {
 
     public ResSignInDto toResSignInDto(User user, List<Search> searches) {
-        return new ResSignInDto(user.getId(),
-                user.getNickName(),
-                user.getUid(),
-                user.getDateBirth(),
-                Optional.ofNullable(user.getProfileUrl()).orElse(""),
-                user.getGender().toString(),
-                searches.stream().map(ResSearchDto::from).collect(Collectors.toList()),
-                Arrays.stream(CategoryType.values()).map(ResCategoryDto::from).collect(Collectors.toList()));
+        return ResSignInDto.builder()
+                .id(user.getId())
+                .uid(user.getUid())
+                .dateBirth(user.getDateBirth())
+                .profileUrl(Optional.ofNullable(user.getProfileUrl()).orElse(""))
+                .gender(user.getGender().toString())
+                .searches(searches.stream()
+                        .map(search -> ResSearchDto.builder()
+                                .id(search.getId())
+                                .createAt(search.getCreateAt())
+                                .text(search.getText())
+                                .build())
+                        .collect(Collectors.toList()))
+                .categories(Arrays.stream(CategoryType.values())
+                        .map(categoryType -> ResCategoryDto.builder()
+                                .id(categoryType.getPrimaryKey())
+                                .categoryType(categoryType.getCategoryType())
+                                .build())
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     public User toUser(ReqSignUpUserDto reqSignUpUserDto) {
@@ -33,10 +45,12 @@ public class UserMapper {
     }
 
     public ResUpdateDto toResUpdateDto(User user) {
-        return new ResUpdateDto(user.getId(),
-                Optional.ofNullable(user.getDateBirth()).orElse(0),
-                user.getGender().toString(),
-                user.getNickName(),
-                Optional.ofNullable(user.getProfileUrl()).orElse(""));
+        return ResUpdateDto.builder()
+                .id(user.getId())
+                .dateBirth(Optional.ofNullable(user.getDateBirth()).orElse(0))
+                .gender(user.getGender().toString())
+                .nickName(user.getNickName())
+                .profileUrl(Optional.ofNullable(user.getProfileUrl()).orElse(""))
+                .build();
     }
 }

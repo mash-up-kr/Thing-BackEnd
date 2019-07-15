@@ -23,19 +23,37 @@ public class EndPageMapper {
         List<ResEndPageReviewDto> resEndPageLikeReviews = this.toResEndReviewDto(likeReview, user.getId());
         List<ResEndPageReviewDto> resEndPageNoReviews = this.toResEndReviewDto(noReview, user.getId());
 
-        return new ResEndPageDto(youTuber.getId(), youTuber.getName(),
-                youTuber.getBannerImgUrl(), youTuber.getChannelId(),
-                youTuber.getDescription(), youTuber.getPublishedAt(),
-                youTuber.getSubscriberCount(), youTuber.getThumbnail(),
-                youTuber.getViewCount(), youTuber.getLikeCount(), youTuber.getNoCount(),
-                resEndPageVideos, resEndPageLikeReviews, resEndPageNoReviews);
+        return ResEndPageDto.builder()
+                .id(youTuber.getId())
+                .name(youTuber.getName())
+                .bannerImgUrl(youTuber.getBannerImgUrl())
+                .channelId(youTuber.getChannelId())
+                .description(youTuber.getDescription())
+                .publishedAt(youTuber.getPublishedAt())
+                .subscriberCount(youTuber.getSubscriberCount())
+                .thumbnail(youTuber.getThumbnail())
+                .viewCount(youTuber.getViewCount())
+                .likeReviewCount(youTuber.getLikeCount())
+                .noReviewCount(youTuber.getNoCount())
+                .videos(resEndPageVideos)
+                .likeReviews(resEndPageLikeReviews)
+                .noReviews(resEndPageNoReviews)
+                .build();
     }
 
     private List<ResEndPageVideoDto> toResEndPageVideoDto(List<Video> videos) {
         if (videos.isEmpty()) {
             return new ArrayList<>();
         }
-        return videos.stream().map(ResEndPageVideoDto::from).collect(Collectors.toList());
+        return videos.stream()
+                .map(video -> ResEndPageVideoDto.builder()
+                        .id(video.getId())
+                        .publishedAt(video.getPublishedAt())
+                        .thumbnail(video.getThumbnail())
+                        .title(video.getTitle())
+                        .youtubeVideoId(video.getYoutubeVideoId())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private List<ResEndPageReviewDto> toResEndReviewDto(List<Review> likeReview, Long userId) {
@@ -43,7 +61,15 @@ public class EndPageMapper {
             return new ArrayList<>();
         }
         return likeReview.stream()
-                .map(review -> ResEndPageReviewDto.from(review, userId))
+                .map(review -> ResEndPageReviewDto.builder()
+                        .id(review.getId())
+                        .createAt(review.getCreateAt())
+                        .liked(review.getLiked().toString())
+                        .nickName(review.getNickName())
+                        .text(review.getText())
+                        .profileUrl(review.getProfileUrl())
+                        .owner(review.isOwner(userId))
+                        .build())
                 .collect(Collectors.toList());
     }
 
