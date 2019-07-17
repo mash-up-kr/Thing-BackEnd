@@ -4,7 +4,6 @@ import com.mashup.thing.endpage.dto.ResEndPageDto;
 import com.mashup.thing.endpage.dto.ResEndPageReviewDto;
 import com.mashup.thing.endpage.dto.ResEndPageVideoDto;
 import com.mashup.thing.review.domain.Review;
-import com.mashup.thing.user.domain.User;
 import com.mashup.thing.video.domain.Video;
 import com.mashup.thing.youtuber.domain.YouTuber;
 import org.springframework.stereotype.Component;
@@ -17,11 +16,11 @@ import java.util.stream.Collectors;
 public class EndPageMapper {
     public ResEndPageDto toEndPage(YouTuber youTuber, List<Video> videos,
                                    List<Review> likeReview, List<Review> noReview,
-                                   User user) {
+                                   Long userId) {
 
         List<ResEndPageVideoDto> resEndPageVideos = this.toResEndPageVideoDto(videos);
-        List<ResEndPageReviewDto> resEndPageLikeReviews = this.toResEndReviewDto(likeReview, user.getId());
-        List<ResEndPageReviewDto> resEndPageNoReviews = this.toResEndReviewDto(noReview, user.getId());
+        List<ResEndPageReviewDto> resEndPageLikeReviews = this.toResEndReviewDto(likeReview, userId);
+        List<ResEndPageReviewDto> resEndPageNoReviews = this.toResEndReviewDto(noReview, userId);
 
         return ResEndPageDto.builder()
                 .id(youTuber.getId())
