@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class EndPageController {
@@ -27,9 +24,10 @@ public class EndPageController {
             @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
-    @GetMapping("/v1/youtubers/{youTuberId}")
+    @GetMapping("/v1/endpages/{youTuberId}")
     public ResponseEntity<ResEndPageDto> getEndPageYouTuber(@RequestHeader(value = "uid") String uid,
-                                                            @PathVariable(value = "youTuberId") Long youTuberId) {
-        return ResponseEntity.status(HttpStatus.OK).body(endPageService.getEndPage(youTuberId, uid));
+                                                            @PathVariable(value = "youTuberId") Long youTuberId,
+                                                            @RequestParam Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(endPageService.getEndPage(youTuberId, userId));
     }
 }
