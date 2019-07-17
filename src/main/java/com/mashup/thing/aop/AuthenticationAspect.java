@@ -1,10 +1,7 @@
 package com.mashup.thing.aop;
 
 import com.mashup.thing.exception.aop.FailAuthenticationException;
-import com.mashup.thing.exception.aop.FailIdAuthenticationException;
-import com.mashup.thing.review.dto.ReqWriteReviewDto;
 import com.mashup.thing.user.UserRepository;
-import com.mashup.thing.user.domain.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -29,7 +26,15 @@ public class AuthenticationAspect {
     public void endPageController() {
     }
 
-    @Pointcut("endPageController()||rankingController()")
+    @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
+    public void userController() {
+    }
+
+    @Pointcut("execution(public * com.mashup.thing.review.ReviewController.*(..))")
+    public void reviewController() {
+    }
+
+    @Pointcut("endPageController()||rankingController()||userController()||reviewController()")
     public void serviceController() {
     }
 
@@ -39,29 +44,6 @@ public class AuthenticationAspect {
 
         if (isNotUser(uid)) {
             throw new FailAuthenticationException();
-        }
-    }
-
-    @Before("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
-    public void checkUpdateUserServiceValid(JoinPoint joinPoint) {
-        String uid = (String) joinPoint.getArgs()[0];
-        Long userId = (Long) joinPoint.getArgs()[1];
-
-        validate(uid, userId);
-    }
-
-    @Before("execution(public * com.mashup.thing.review.ReviewController.*(..))")
-    public void checkReviewServiceValid(JoinPoint joinPoint) {
-        String uid = (String) joinPoint.getArgs()[0];
-        ReqWriteReviewDto reqWriteReviewDto = (ReqWriteReviewDto) joinPoint.getArgs()[2];
-
-        validate(uid, reqWriteReviewDto.getUserId());
-    }
-
-    private void validate(String uid, Long userId) {
-        User user = userRepository.findByUid(uid).orElseThrow(FailAuthenticationException::new);
-        if (user.isNotSameId(userId)) {
-            throw new FailIdAuthenticationException();
         }
     }
 

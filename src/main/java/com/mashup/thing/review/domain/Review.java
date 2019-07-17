@@ -46,4 +46,7 @@ public class Review {
         return this.userId.equals(userId);
     }
 
+    public Boolean isLike() {
+        return this.liked.equals(Liked.LIKE);
+    }
 }
