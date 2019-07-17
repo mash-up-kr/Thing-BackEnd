@@ -1,8 +1,9 @@
-package com.mashup.thing.review;
+package com.mashup.thing.review.service;
 
 import com.mashup.thing.exception.user.NotFoundUserException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
-import com.mashup.thing.review.domain.Liked;
+import com.mashup.thing.review.ReviewMapper;
+import com.mashup.thing.review.ReviewRepository;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.review.dto.ReqWriteReviewDto;
 import com.mashup.thing.user.UserRepository;
@@ -31,25 +32,22 @@ public class WriteReviewService {
     }
 
     @Transactional
-    public void write(Long youTuberId, ReqWriteReviewDto reqWriteReviewDto) {
-        User user = userRepository.findById(reqWriteReviewDto.getUserId()).orElseThrow(NotFoundUserException::new);
+    public void write(ReqWriteReviewDto reqWriteReviewDto) {
+        User user = userRepository.findById(reqWriteReviewDto.getUserId())
+                .orElseThrow(NotFoundUserException::new);
 
-        YouTuber youTuber = youTuberRepository.findById(youTuberId).orElseThrow(NotFoundYouTuBerException::new);
+        YouTuber youTuber = youTuberRepository.findById(reqWriteReviewDto.getYouTuberId())
+                .orElseThrow(NotFoundYouTuBerException::new);
+
         Review review = reviewMapper.toReview(youTuber, user, reqWriteReviewDto);
-
         reviewRepository.save(review);
 
-        if (isLike(reqWriteReviewDto)) {
-            youTuber.plusLikeReviewCount();
+        if (review.isLike()) {
+            youTuber.increaseLikeReviewCount();
             return;
         }
+        youTuber.increaseNoReviewCount();
 
-        youTuber.plusNoReviewCount();
-
-    }
-
-    private Boolean isLike(ReqWriteReviewDto reqWriteReviewDto) {
-        return reqWriteReviewDto.getLiked().equals(Liked.LIKE.getLike());
     }
 
 }
