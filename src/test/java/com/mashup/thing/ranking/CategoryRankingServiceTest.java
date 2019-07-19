@@ -28,7 +28,7 @@ public class CategoryRankingServiceTest {
         rankingRepository = mock(RankingRepository.class);
         rankingMapper = mock(RankingMapper.class);
 
-        categoryRankingService = new CategoryRankingService(categoryRepository, rankingRepository, rankingMapper);
+        categoryRankingService = new CategoryRankingService(categoryRepository, rankingRepository, checkRankingRepository, rankingMapper);
     }
 
     @Test

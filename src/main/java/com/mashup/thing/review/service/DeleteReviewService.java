@@ -2,7 +2,6 @@ package com.mashup.thing.review.service;
 
 import com.mashup.thing.exception.review.NotFoundReviewException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
-import com.mashup.thing.review.ReviewMapper;
 import com.mashup.thing.review.ReviewRepository;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.review.dto.ReqDeleteReviewDto;
@@ -16,14 +15,11 @@ public class DeleteReviewService {
 
     private final YouTuberRepository youTuberRepository;
     private final ReviewRepository reviewRepository;
-    private final ReviewMapper reviewMapper;
 
     public DeleteReviewService(YouTuberRepository youTuberRepository,
-                               ReviewRepository reviewRepository,
-                               ReviewMapper reviewMapper) {
+                               ReviewRepository reviewRepository) {
         this.youTuberRepository = youTuberRepository;
         this.reviewRepository = reviewRepository;
-        this.reviewMapper = reviewMapper;
     }
 
     @Transactional
@@ -41,6 +37,6 @@ public class DeleteReviewService {
             youTuber.decreaseLikeReviewCount();
             return;
         }
-        youTuber.decreaseLikeReviewCount();
+        youTuber.decreaseNoReviewCount();
     }
 }
