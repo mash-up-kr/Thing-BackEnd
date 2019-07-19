@@ -12,21 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class RankingMapper {
     public ResRankingsDto toRankingsDto(Page<Ranking> rankingPage, FilterType filter) {
-        if (filter.equals(FilterType.TOTAL)) {
-            return toResRankingsDto(rankingPage, filter);
-        }
-        return soaringRanking(rankingPage, filter);
-    }
-
-    //ToDo 급상승 임시 로직 추후 배치를 통해서 처리
-    private ResRankingsDto soaringRanking(Page<Ranking> rankingPage, FilterType filter) {
-        int size = rankingPage.getContent().size();
-        for (int i = 1; i <= size; i++) {
-            int num = (rankingPage.getPageable().getPageNumber() * 50) + i;
-            rankingPage.getContent().get(i - 1).setRanking((long) num);
-        }
         return toResRankingsDto(rankingPage, filter);
-
     }
 
     private ResRankingsDto toResRankingsDto(Page<Ranking> rankingPage, FilterType filter) {

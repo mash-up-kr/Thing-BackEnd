@@ -10,6 +10,5 @@ import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllByYouTuberIdAndLiked(Long youTuberId, Liked like, Pageable createAt);
-
     Optional<Review> findByIdAndUserIdAndYouTuberId(Long reviewId, Long userId, Long youTuberId);
 }
