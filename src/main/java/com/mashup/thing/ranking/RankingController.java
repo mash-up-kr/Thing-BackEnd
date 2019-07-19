@@ -41,7 +41,7 @@ public class RankingController {
             @ApiResponse(code = 500, message = "서버 에러")
     })
     @GetMapping("/v1/categories/{categoryId}/rankings")
-    public ResponseEntity<ResRankingsDto> getRankings(@RequestHeader(value = "uid") String uid,
+    public ResponseEntity<ResRankingsDto> getCategoryRankings(@RequestHeader(value = "uid") String uid,
                                                       @RequestParam(value = "page") Integer page,
                                                       @RequestParam(value = "filter") FilterType filter,
                                                       @PathVariable Long categoryId) {

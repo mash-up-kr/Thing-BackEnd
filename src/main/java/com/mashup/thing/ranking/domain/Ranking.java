@@ -22,9 +22,10 @@ public class Ranking {
     private Long subscriberCount;
     private String thumbnail;
     private String bannerImgUrl;
+    private Double soaring;
+    private String rankingType;
     private Long categoryId;
     private Long youTuberId;
-    private Double soaring;
 
     public void setRanking(Long ranking) {
         this.ranking = ranking;
