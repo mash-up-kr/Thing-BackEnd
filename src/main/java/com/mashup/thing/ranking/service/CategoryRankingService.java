@@ -1,10 +1,14 @@
-package com.mashup.thing.ranking;
+package com.mashup.thing.ranking.service;
 
 import com.mashup.thing.category.CategoryRepository;
 import com.mashup.thing.exception.category.NotFoundCategoryException;
+import com.mashup.thing.ranking.FilterType;
+import com.mashup.thing.ranking.RankingMapper;
 import com.mashup.thing.ranking.domain.CheckRanking;
 import com.mashup.thing.ranking.domain.Ranking;
 import com.mashup.thing.ranking.dto.ResRankingsDto;
+import com.mashup.thing.ranking.repository.CheckRankingRepository;
+import com.mashup.thing.ranking.repository.RankingRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;

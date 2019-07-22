@@ -15,6 +15,14 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String mainTag;
+
+    @Enumerated(value = EnumType.STRING)
+    private TagType mainTag;
+
     private String subTag;
+
+
+    public Integer getMainTagIndex() {
+        return this.mainTag.getIndex();
+    }
 }

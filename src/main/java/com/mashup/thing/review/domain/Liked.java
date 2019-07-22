@@ -21,10 +21,6 @@ public enum Liked {
     }
 
     public boolean hasLike(Integer code) {
-        return this.like.equals(like);
-    }
-
-    public Integer getLike() {
-        return like;
+        return this.like.equals(code);
     }
 }
