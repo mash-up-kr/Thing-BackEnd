@@ -1,6 +1,5 @@
 package com.mashup.thing.ranking;
 
-import com.mashup.thing.category.domain.CategoryType;
 import com.mashup.thing.ranking.dto.ResRankingsDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,20 +15,6 @@ public class RankingController {
 
     public RankingController(RankingService rankingService) {
         this.rankingService = rankingService;
-    }
-
-    @ApiOperation(value = "GET RANKING LIST", notes = "GET RANKING LIST API - Page(Request PageIndex) / Page StartIndex - 0")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "RANKING 조회 성공"),
-            @ApiResponse(code = 400, message = "존재 하지 않는 카테고리"),
-            @ApiResponse(code = 403, message = "인증 실패"),
-            @ApiResponse(code = 500, message = "서버 에러")
-    })
-    @GetMapping("/v1/rankings")
-    public ResponseEntity<ResRankingsDto> getRankings(@RequestHeader(value = "uid") String uid,
-                                                      @RequestParam(value = "page") Integer page,
-                                                      @RequestParam(value = "filter") FilterType filter) {
-        return ResponseEntity.status(HttpStatus.OK).body(rankingService.getRankings(page, filter, CategoryType.TOTAL.getPrimaryKey()));
     }
 
     @ApiOperation(value = "GET CATEGORY RANKING LIST", notes = "GET CATEGORY RANKING LIST API - Page(Request PageIndex) / Page StartIndex - 0" +
