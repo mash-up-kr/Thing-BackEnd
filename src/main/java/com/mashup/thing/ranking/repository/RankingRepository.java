@@ -1,4 +1,4 @@
-package com.mashup.thing.ranking;
+package com.mashup.thing.ranking.repository;
 
 import com.mashup.thing.ranking.domain.Ranking;
 import org.springframework.data.domain.Page;

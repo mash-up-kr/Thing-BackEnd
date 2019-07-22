@@ -1,5 +1,6 @@
-package com.mashup.thing.ranking;
+package com.mashup.thing.ranking.service;
 
+import com.mashup.thing.ranking.FilterType;
 import com.mashup.thing.ranking.dto.ResRankingsDto;
 import org.springframework.stereotype.Service;
 
