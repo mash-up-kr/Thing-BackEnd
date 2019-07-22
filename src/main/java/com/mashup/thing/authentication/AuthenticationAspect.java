@@ -1,4 +1,4 @@
-package com.mashup.thing.aop;
+package com.mashup.thing.authentication;
 
 import com.mashup.thing.exception.aop.FailAuthenticationException;
 import com.mashup.thing.user.UserRepository;
@@ -8,9 +8,10 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+
 @Aspect
 @Component
-public class AuthenticationAspect {
+class AuthenticationAspect {
 
     private final UserRepository userRepository;
 
@@ -22,10 +23,6 @@ public class AuthenticationAspect {
     public void rankingController() {
     }
 
-    @Pointcut("execution(public * com.mashup.thing.endpage.EndPageController.*(..))")
-    public void endPageController() {
-    }
-
     @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
     public void userController() {
     }
@@ -34,7 +31,7 @@ public class AuthenticationAspect {
     public void reviewController() {
     }
 
-    @Pointcut("endPageController()||rankingController()||userController()||reviewController()")
+    @Pointcut("rankingController()||userController()||reviewController()")
     public void serviceController() {
     }
 
