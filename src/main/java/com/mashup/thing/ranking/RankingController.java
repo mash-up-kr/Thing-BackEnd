@@ -18,7 +18,7 @@ public class RankingController {
     }
 
     @ApiOperation(value = "GET CATEGORY RANKING LIST", notes = "GET CATEGORY RANKING LIST API - Page(Request PageIndex) / Page StartIndex - 0" +
-            "\n Category - 지식(1), 스포츠(2), 뷰티(3), 키즈(4), 토크(5), 일상(6), 게임(7), 푸드(8), 엔터테이먼트(9), 뮤직(10), 코믹(11)")
+            "\n Category - 전체(1), 게임(2), 뷰티(3), 스포츠(4), 엔터테인먼트(5), 음악(6), 일상(7), 지식(8), 키즈(9), 펫(10), 푸드(11)")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "CATEGORY RANKING 조회 성공"),
             @ApiResponse(code = 400, message = "존재 하지 않는 카테고리"),
