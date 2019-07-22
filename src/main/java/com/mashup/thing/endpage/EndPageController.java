@@ -26,8 +26,7 @@ public class EndPageController {
     })
     @GetMapping("/v1/endpages/{youTuberId}")
     public ResponseEntity<ResEndPageDto> getEndPageYouTuber(@RequestHeader(value = "uid") String uid,
-                                                            @PathVariable(value = "youTuberId") Long youTuberId,
-                                                            @RequestParam Long userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(endPageService.getEndPage(youTuberId, userId));
+                                                            @PathVariable(value = "youTuberId") Long youTuberId) {
+        return ResponseEntity.status(HttpStatus.OK).body(endPageService.getEndPage(youTuberId, uid));
     }
 }
