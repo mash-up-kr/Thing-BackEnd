@@ -1,6 +1,7 @@
 package com.mashup.thing.ranking;
 
 import com.mashup.thing.ranking.dto.ResRankingsDto;
+import com.mashup.thing.ranking.service.RankingService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
