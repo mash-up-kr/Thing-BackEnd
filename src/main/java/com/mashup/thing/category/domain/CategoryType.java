@@ -2,12 +2,13 @@ package com.mashup.thing.category.domain;
 
 public enum CategoryType {
 
-    KNOWLEDGE("지식", 1L), SPORTS("스포츠", 2L),
-    BEAUTY("뷰티", 3L), KIDS("키즈", 4L),
-    TALK("토크", 5L), DAILY("일상", 6L),
-    GAME("게임", 7L), FOOD("푸드", 8L),
-    ENTERTAINMENT("엔터테인먼트", 9L), MUSIC("뮤직", 10L),
-    COMIC("코믹", 11L), TOTAL("전체", 12L);
+
+    TOTAL("전체", 1L), GAME("게임", 2L),
+    BEAUTY("뷰티", 3L), SPORTS("스포츠", 4L),
+    ENTERTAINMENT("엔터테인먼트", 5L), MUSIC("뮤직", 6L),
+    DAILY("일상", 7L), KNOWLEDGE("지식", 8L),
+    KIDS("키즈", 9L), PET("펫", 10L),
+    FOOD("푸드", 11L);
 
     private String categoryType;
     private Long primaryKey;
@@ -21,5 +22,7 @@ public enum CategoryType {
         return categoryType;
     }
 
-    public Long getPrimaryKey() { return primaryKey;}
+    public Long getPrimaryKey() {
+        return primaryKey;
+    }
 }
