@@ -2,6 +2,7 @@ package com.mashup.thing.ranking;
 
 import com.mashup.thing.category.CategoryRepository;
 import com.mashup.thing.exception.category.NotFoundCategoryException;
+import com.mashup.thing.ranking.repository.CheckRankingRepository;
 import com.mashup.thing.ranking.repository.RankingRepository;
 import com.mashup.thing.ranking.service.CategoryRankingService;
 import org.junit.Before;
@@ -20,6 +21,7 @@ public class CategoryRankingServiceTest {
 
     private CategoryRepository categoryRepository;
     private RankingRepository rankingRepository;
+    private CheckRankingRepository checkRankingRepository;
     private RankingMapper rankingMapper;
 
     private CategoryRankingService categoryRankingService;
@@ -27,6 +29,7 @@ public class CategoryRankingServiceTest {
     @Before
     public void mockUp() {
         categoryRepository = mock(CategoryRepository.class);
+        checkRankingRepository = mock(CheckRankingRepository.class);
         rankingRepository = mock(RankingRepository.class);
         rankingMapper = mock(RankingMapper.class);
 

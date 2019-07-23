@@ -1,10 +1,12 @@
 package com.mashup.thing.youtuber.domain;
 
+import com.mashup.thing.video.domain.Video;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +35,10 @@ public class YouTuber {
     private Long noCount;
     private String tag;
     private Long categoryId;
+
+    @OneToMany
+    @JoinColumn(name = "youTuberId")
+    private List<Video> videos;
 
     @ElementCollection
     @CollectionTable(name = "you_tuber_tag",
