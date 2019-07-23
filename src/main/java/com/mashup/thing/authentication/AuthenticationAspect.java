@@ -35,7 +35,11 @@ class AuthenticationAspect {
     public void tagController() {
     }
 
-    @Pointcut("rankingController()||userController()||reviewController()||tagController()")
+    @Pointcut("execution(public * com.mashup.thing.recommendation.RecommendationController.*(..))")
+    public void recommendationController() {
+    }
+
+    @Pointcut("rankingController()||userController()||reviewController()||tagController()||recommendationController()")
     public void serviceController() {
     }
 

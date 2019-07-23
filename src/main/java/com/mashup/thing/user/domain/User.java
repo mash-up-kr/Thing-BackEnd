@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -22,6 +24,8 @@ public class User {
     private String uid;
 
     private Integer dateBirth;
+
+    private String tag;
 
     @Lob
     @Column(name="profile_url", length=512)
@@ -55,8 +59,15 @@ public class User {
         return !this.nickName.equals(nickName);
     }
 
-    public Boolean isNotSameId(Long id) {
-        return !this.id.equals(id);
+    public void updateSearchTag(List<String> common, List<String> category) {
+        String commonTags = common.stream().map(this::createTag).collect(Collectors.joining());
+        String categoryTags = category.stream().map(this::createTag).collect(Collectors.joining());
+
+        this.tag = commonTags + categoryTags;
+    }
+
+    private String createTag(String tag) {
+        return "#" + tag + ",";
     }
 }
 

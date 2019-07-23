@@ -14,7 +14,6 @@ spring:
   servlet:
     multipart:
       location: ${MULTIPART_LOCATION}
-
 ---
 
 spring:
@@ -54,7 +53,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
-
 
 ---
 
