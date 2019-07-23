@@ -16,19 +16,16 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(unique = true)
     private String nickName;
-
     @Column(unique = true)
     private String uid;
-
     private Integer dateBirth;
-
-    private String tag;
+    private String commonTag;
+    private String categoryTag;
 
     @Lob
-    @Column(name="profile_url", length=512)
+    @Column(name = "profile_url", length = 512)
     private String profileUrl;
 
     @Enumerated(EnumType.STRING)
@@ -63,12 +60,18 @@ public class User {
         String commonTags = common.stream().map(this::createTag).collect(Collectors.joining());
         String categoryTags = category.stream().map(this::createTag).collect(Collectors.joining());
 
-        this.tag = commonTags + categoryTags;
+        this.commonTag = commonTags;
+        this.categoryTag = categoryTags;
     }
 
     private String createTag(String tag) {
         return "#" + tag + ",";
     }
+
+    public Boolean isTag() {
+        return !(commonTag == null) && !(categoryTag == null);
+    }
+
 }
 
 

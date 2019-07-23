@@ -6,7 +6,6 @@ public class ThingApplicationTests {
 
     @Test
     public void contextLoads() {
-
     }
 
 
