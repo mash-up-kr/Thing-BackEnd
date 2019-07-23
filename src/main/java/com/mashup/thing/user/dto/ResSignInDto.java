@@ -16,7 +16,6 @@ public class ResSignInDto {
     private Integer dateBirth;
     private String profileUrl;
     private String gender;
-    private List<ResSearchDto> searches;
     private List<ResCategoryDto> categories;
 
 }
