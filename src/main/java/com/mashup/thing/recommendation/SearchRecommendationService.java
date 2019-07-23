@@ -2,28 +2,32 @@ package com.mashup.thing.recommendation;
 
 import com.mashup.thing.exception.user.NotFoundUserException;
 import com.mashup.thing.recommendation.dto.ReqRecommendationDto;
+import com.mashup.thing.recommendation.dto.ResHomeDto;
 import com.mashup.thing.recommendation.dto.ResRecommendationDto;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.youtuber.YouTuberRepository;
 import com.mashup.thing.youtuber.YouTuberSpec;
 import com.mashup.thing.youtuber.domain.YouTuber;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
-public class RecommendationByTagService {
+public class SearchRecommendationService {
     private final UserRepository userRepository;
     private final YouTuberRepository youTuberRepository;
     private final RecommendationMapper recommendationMapper;
 
-    public RecommendationByTagService(UserRepository userRepository,
-                                      YouTuberRepository youTuberRepository,
-                                      RecommendationMapper recommendationMapper) {
+    public SearchRecommendationService(UserRepository userRepository,
+                                       YouTuberRepository youTuberRepository,
+                                       RecommendationMapper recommendationMapper) {
         this.userRepository = userRepository;
         this.youTuberRepository = youTuberRepository;
         this.recommendationMapper = recommendationMapper;
@@ -47,5 +51,24 @@ public class RecommendationByTagService {
 
         return recommendationMapper.toResRecommendationDto(youTubers);
 
+    }
+
+    public ResHomeDto searchByUser(String uid) {
+        User user = userRepository.findByUid(uid).orElseThrow(NotFoundUserException::new);
+
+        Page<YouTuber> soaringYouTubers = youTuberRepository.findByOrderBySoaringDesc(PageRequest.of(0, 3));
+
+        List<YouTuber> youTubers = new ArrayList<>();
+
+        if (user.isTag()) {
+            Specification<YouTuber> spec = YouTuberSpec.isTags(user.getCommonTag(), user.getCategoryTag());
+            youTubers = youTuberRepository.findAll(spec);
+        }
+
+        if (youTubers.isEmpty()) {
+            return recommendationMapper.toSoaringYouTuber(soaringYouTubers);
+        }
+
+        return recommendationMapper.toResHomeDto(youTubers, soaringYouTubers);
     }
 }

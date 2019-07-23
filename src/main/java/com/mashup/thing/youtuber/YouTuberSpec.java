@@ -5,24 +5,36 @@ import com.mashup.thing.youtuber.domain.YouTuber_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class YouTuberSpec {
+    private static final String SEPARATOR = ",";
+
     private YouTuberSpec() {
     }
 
     public static Specification<YouTuber> isTags(List<String> commonTags, List<String> categoryTags) {
+        Specification<YouTuber> spec = fetchJoinVideo();
 
-        Specification<YouTuber> spec = Specification.where((root, query, criteriaBuilder) -> {
+        return spec.and(isCommonTags(commonTags).and(isCategoryTags(categoryTags)));
+    }
+
+    public static Specification<YouTuber> isTags(String commonTag, String categoryTag) {
+        Specification<YouTuber> spec = fetchJoinVideo();
+        List<String> commonTags = Arrays.stream(commonTag.split(SEPARATOR)).collect(Collectors.toList());
+        List<String> categoryTags = Arrays.stream(categoryTag.split(SEPARATOR)).collect(Collectors.toList());
+
+        return spec.and(isCommonTags(commonTags).and(isCategoryTags(categoryTags)));
+    }
+
+    private static Specification<YouTuber> fetchJoinVideo() {
+        return Specification.where((root, query, criteriaBuilder) -> {
             query.distinct(true);
             root.fetch(YouTuber_.VIDEOS, JoinType.LEFT);
             return null;
         });
-
-        Specification<YouTuber> commonSpecification = YouTuberSpec.isCommonTags(commonTags);
-        Specification<YouTuber> categorySpecification = YouTuberSpec.isCategoryTags(categoryTags);
-
-        return spec.and(commonSpecification.and(categorySpecification));
     }
 
     private static Specification<YouTuber> isCommonTags(List<String> commonTags) {
@@ -45,6 +57,7 @@ public class YouTuberSpec {
         }
         return categorySpecification;
     }
+
 
     private static Specification<YouTuber> isTag(String tag) {
         return (Specification<YouTuber>) (root, query, criteriaBuilder) ->
