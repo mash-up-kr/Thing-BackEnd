@@ -28,7 +28,7 @@ public class YouTuberController {
             @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
-    @GetMapping("/v1/recommendations")
+    @GetMapping("/v1/youtubers/recommendations")
     public ResponseEntity<ResRecommendationDto> recommendationByTag(@RequestHeader(value = "uid") String uid,
                                                                     @ModelAttribute ReqRecommendationDto reqRecommendationDto) {
         return ResponseEntity.status(HttpStatus.OK).body(youTuberService.recommendationByTag(uid, reqRecommendationDto));
@@ -41,7 +41,7 @@ public class YouTuberController {
             @ApiResponse(code = 403, message = "인증 실패"),
             @ApiResponse(code = 500, message = "서버 에러")
     })
-    @GetMapping("/v1/recommendations/home")
+    @GetMapping("/v1/youtubers/recommendations/home")
     public ResponseEntity<ResHomeDto> recommendation(@RequestHeader(value = "uid") String uid) {
         return ResponseEntity.status(HttpStatus.OK).body(youTuberService.recommendation(uid));
     }
