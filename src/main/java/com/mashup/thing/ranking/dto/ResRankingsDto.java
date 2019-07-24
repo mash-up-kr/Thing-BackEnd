@@ -16,4 +16,17 @@ public class ResRankingsDto {
     private LocalDateTime createAt;
     private String filterType;
 
+    @Getter
+    @Builder
+    public static class ResRankingDto {
+
+        private Long id;
+        private String name;
+        private Long ranking;
+        private String viewCount;
+        private String subscriberCount;
+        private String thumbnail;
+        private String bannerImgUrl;
+        private String soaring;
+    }
 }

@@ -5,7 +5,6 @@ import com.mashup.thing.user.UserRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 
@@ -19,31 +18,7 @@ class AuthenticationAspect {
         this.userRepository = userRepository;
     }
 
-    @Pointcut("execution(public * com.mashup.thing.ranking.RankingController.*(..))")
-    public void rankingController() {
-    }
-
-    @Pointcut("execution(public * com.mashup.thing.user.UserController.updateUser(..))")
-    public void userController() {
-    }
-
-    @Pointcut("execution(public * com.mashup.thing.review.ReviewController.*(..))")
-    public void reviewController() {
-    }
-
-    @Pointcut("execution(public * com.mashup.thing.tag.TagController.*(..))")
-    public void tagController() {
-    }
-
-    @Pointcut("execution(public * com.mashup.thing.recommendation.RecommendationController.*(..))")
-    public void recommendationController() {
-    }
-
-    @Pointcut("rankingController()||userController()||reviewController()||tagController()||recommendationController()")
-    public void serviceController() {
-    }
-
-    @Before(value = "serviceController()")
+    @Before(value = "execution(public * com.mashup.thing.*.*Controller.*(String,..))")
     public void checkUidValid(JoinPoint joinPoint) {
         String uid = (String) joinPoint.getArgs()[0];
 

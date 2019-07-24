@@ -18,4 +18,12 @@ public class ResSignInDto {
     private String gender;
     private List<ResCategoryDto> categories;
 
+    @Getter
+    @Builder
+    public static class ResCategoryDto {
+        private Long id;
+        private String categoryType;
+
+    }
+
 }

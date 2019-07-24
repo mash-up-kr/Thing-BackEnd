@@ -1,7 +1,6 @@
 package com.mashup.thing.ranking;
 
 import com.mashup.thing.ranking.domain.Ranking;
-import com.mashup.thing.ranking.dto.ResRankingDto;
 import com.mashup.thing.ranking.dto.ResRankingsDto;
 import com.mashup.thing.util.MoneyCovert;
 import org.springframework.data.domain.Page;
@@ -27,8 +26,8 @@ public class RankingMapper {
     }
 
 
-    private ResRankingDto toRankingDto(Ranking ranking) {
-        return ResRankingDto.builder()
+    private ResRankingsDto.ResRankingDto toRankingDto(Ranking ranking) {
+        return ResRankingsDto.ResRankingDto.builder()
                 .id(ranking.getYouTuberId())
                 .name(ranking.getName())
                 .ranking(ranking.getRanking())
