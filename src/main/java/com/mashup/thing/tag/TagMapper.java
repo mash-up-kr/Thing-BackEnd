@@ -2,20 +2,19 @@ package com.mashup.thing.tag;
 
 import com.mashup.thing.tag.domain.Tag;
 import com.mashup.thing.tag.domain.TagType;
-import com.mashup.thing.tag.dto.ResTagDto;
-import com.mashup.thing.tag.dto.ResTagsDto;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class TagMapper {
 
     public ResTagsDto toResTagsDto(List<Tag> tags) {
-        List<ResTagDto> tagDtos = new ArrayList<>();
+        List<ResTagsDto.ResTagDto> tagDtos = new ArrayList<>();
 
         for (TagType tagType : TagType.values()) {
-            tagDtos.add(ResTagDto.builder()
+            tagDtos.add(ResTagsDto.ResTagDto.builder()
                     .category(tagType.getTagType())
                     .list(new ArrayList<>())
                     .build());

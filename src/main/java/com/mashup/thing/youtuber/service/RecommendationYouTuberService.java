@@ -1,11 +1,12 @@
-package com.mashup.thing.recommendation;
+package com.mashup.thing.youtuber.service;
 
 import com.mashup.thing.exception.user.NotFoundUserException;
-import com.mashup.thing.recommendation.dto.ReqRecommendationDto;
-import com.mashup.thing.recommendation.dto.ResHomeDto;
-import com.mashup.thing.recommendation.dto.ResRecommendationDto;
+import com.mashup.thing.youtuber.dto.ReqRecommendationDto;
+import com.mashup.thing.youtuber.dto.ResHomeDto;
+import com.mashup.thing.youtuber.dto.ResRecommendationDto;
 import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
+import com.mashup.thing.youtuber.YouTuberMapper;
 import com.mashup.thing.youtuber.YouTuberRepository;
 import com.mashup.thing.youtuber.YouTuberSpec;
 import com.mashup.thing.youtuber.domain.YouTuber;
@@ -20,17 +21,17 @@ import java.util.List;
 
 
 @Service
-public class SearchRecommendationService {
+public class RecommendationYouTuberService {
     private final UserRepository userRepository;
     private final YouTuberRepository youTuberRepository;
-    private final RecommendationMapper recommendationMapper;
+    private final YouTuberMapper youTuberMapper;
 
-    public SearchRecommendationService(UserRepository userRepository,
-                                       YouTuberRepository youTuberRepository,
-                                       RecommendationMapper recommendationMapper) {
+    public RecommendationYouTuberService(UserRepository userRepository,
+                                         YouTuberRepository youTuberRepository,
+                                         YouTuberMapper youTuberMapper) {
         this.userRepository = userRepository;
         this.youTuberRepository = youTuberRepository;
-        this.recommendationMapper = recommendationMapper;
+        this.youTuberMapper = youTuberMapper;
     }
 
     @Transactional
@@ -46,10 +47,10 @@ public class SearchRecommendationService {
         List<YouTuber> youTubers = youTuberRepository.findAll(spec);
 
         if (youTubers.isEmpty()) {
-            return recommendationMapper.toNoneYouTuber();
+            return youTuberMapper.toNoneYouTuber();
         }
 
-        return recommendationMapper.toResRecommendationDto(youTubers);
+        return youTuberMapper.toResRecommendationDto(youTubers);
 
     }
 
@@ -66,9 +67,9 @@ public class SearchRecommendationService {
         }
 
         if (youTubers.isEmpty()) {
-            return recommendationMapper.toSoaringYouTuber(soaringYouTubers);
+            return youTuberMapper.toSoaringYouTuber(soaringYouTubers);
         }
 
-        return recommendationMapper.toResHomeDto(youTubers, soaringYouTubers);
+        return youTuberMapper.toResHomeDto(youTubers, soaringYouTubers);
     }
 }

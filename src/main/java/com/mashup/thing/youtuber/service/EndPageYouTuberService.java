@@ -1,6 +1,6 @@
-package com.mashup.thing.endpage;
+package com.mashup.thing.youtuber.service;
 
-import com.mashup.thing.endpage.dto.ResEndPageDto;
+import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import com.mashup.thing.exception.aop.FailAuthenticationException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
 import com.mashup.thing.review.ReviewRepository;
@@ -10,6 +10,7 @@ import com.mashup.thing.user.UserRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.video.VideoRepository;
 import com.mashup.thing.video.domain.Video;
+import com.mashup.thing.youtuber.YouTuberMapper;
 import com.mashup.thing.youtuber.YouTuberRepository;
 import com.mashup.thing.youtuber.domain.YouTuber;
 import org.springframework.data.domain.PageRequest;
@@ -19,26 +20,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EndPageService {
+public class EndPageYouTuberService {
     private final ReviewRepository reviewRepository;
     private final VideoRepository videoRepository;
     private final YouTuberRepository youTuberRepository;
     private final UserRepository userRepository;
-    private final EndPageMapper endPageMapper;
+    private final YouTuberMapper youTuberMapper;
 
     private final static String SORT_PUBLISHED_AT = "publishedAt";
     private final static String SORT_CREATE_AT = "createAt";
 
-    public EndPageService(ReviewRepository reviewRepository,
-                          VideoRepository videoRepository,
-                          YouTuberRepository youTuberRepository,
-                          UserRepository userRepository,
-                          EndPageMapper endPageMapper) {
+    public EndPageYouTuberService(ReviewRepository reviewRepository,
+                                  VideoRepository videoRepository,
+                                  YouTuberRepository youTuberRepository,
+                                  UserRepository userRepository,
+                                  YouTuberMapper youTuberMapper) {
         this.reviewRepository = reviewRepository;
         this.videoRepository = videoRepository;
         this.youTuberRepository = youTuberRepository;
         this.userRepository = userRepository;
-        this.endPageMapper = endPageMapper;
+        this.youTuberMapper = youTuberMapper;
     }
 
     public ResEndPageDto getEndPage(Long youTuberId, String uid) {
@@ -57,6 +58,6 @@ public class EndPageService {
         List<Review> noReview = reviewRepository.findAllByYouTuberIdAndLiked(youTuberId, Liked.NO,
                 PageRequest.of(0, 3, new Sort(Sort.Direction.DESC, SORT_CREATE_AT)));
 
-        return endPageMapper.toEndPage(youTuber, videos, likeReview, noReview, user.getId());
+        return youTuberMapper.toEndPage(youTuber, videos, likeReview, noReview, user.getId());
     }
 }

@@ -1,4 +1,4 @@
-package com.mashup.thing.recommendation.dto;
+package com.mashup.thing.youtuber.dto;
 
 import lombok.Getter;
 
