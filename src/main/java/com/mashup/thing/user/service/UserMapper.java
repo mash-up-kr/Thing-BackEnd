@@ -18,6 +18,7 @@ public class UserMapper {
         return ResSignInDto.builder()
                 .id(user.getId())
                 .uid(user.getUid())
+                .nickName(user.getNickName())
                 .dateBirth(user.getDateBirth())
                 .profileUrl(Optional.ofNullable(user.getProfileUrl()).orElse(""))
                 .gender(user.getGender().toString())
