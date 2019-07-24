@@ -3,7 +3,6 @@ package com.mashup.thing.user.service;
 import com.mashup.thing.category.domain.CategoryType;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
-import com.mashup.thing.user.dto.ResCategoryDto;
 import com.mashup.thing.user.dto.ResSignInDto;
 import com.mashup.thing.user.dto.ResUpdateDto;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class UserMapper {
                 .profileUrl(Optional.ofNullable(user.getProfileUrl()).orElse(""))
                 .gender(user.getGender().toString())
                 .categories(Arrays.stream(CategoryType.values())
-                        .map(categoryType -> ResCategoryDto.builder()
+                        .map(categoryType -> ResSignInDto.ResCategoryDto.builder()
                                 .id(categoryType.getPrimaryKey())
                                 .categoryType(categoryType.getCategoryType())
                                 .build())

@@ -1,6 +1,5 @@
 package com.mashup.thing.tag;
 
-import com.mashup.thing.tag.dto.ResTagsDto;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

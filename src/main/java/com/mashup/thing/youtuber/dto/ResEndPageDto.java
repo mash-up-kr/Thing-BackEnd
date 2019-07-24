@@ -1,4 +1,4 @@
-package com.mashup.thing.endpage.dto;
+package com.mashup.thing.youtuber.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -24,5 +24,32 @@ public class ResEndPageDto {
     private List<ResEndPageReviewDto> likeReviews;
     private List<ResEndPageReviewDto> noReviews;
     private List<ResEndPageVideoDto> videos;
+
+
+    @Getter
+    @Builder
+    public static class ResEndPageVideoDto {
+
+        private Long id;
+        private String thumbnail;
+        private String youtubeVideoId;
+        private LocalDateTime publishedAt;
+        private String title;
+
+    }
+
+    @Getter
+    @Builder
+    public static class ResEndPageReviewDto {
+
+        private Long id;
+        private LocalDateTime createAt;
+        private String nickName;
+        private String profileUrl;
+        private String text;
+        private String liked;
+        private Boolean owner;
+    }
+
 
 }

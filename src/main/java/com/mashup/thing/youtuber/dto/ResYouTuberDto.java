@@ -1,4 +1,4 @@
-package com.mashup.thing.recommendation.dto;
+package com.mashup.thing.youtuber.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -13,4 +13,14 @@ public class ResYouTuberDto {
     private String thumbnail;
     private List<String> tag;
     private List<ResVideoDto> videos;
+
+    @Getter
+    @Builder
+    public static class ResVideoDto {
+        private Long id;
+        private String thumbnail;
+        private String youtubeVideoId;
+        private String title;
+    }
+
 }
