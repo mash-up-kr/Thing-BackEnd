@@ -2,6 +2,7 @@ package com.mashup.thing.user;
 
 import com.mashup.thing.exception.user.ExistNicknameException;
 import com.mashup.thing.user.domain.User;
+import com.mashup.thing.user.domain.UserRepository;
 import com.mashup.thing.user.dto.ReqUpdateUserDto;
 import com.mashup.thing.user.service.S3Uploader;
 import com.mashup.thing.user.service.UpdateUserService;

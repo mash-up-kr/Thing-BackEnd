@@ -1,7 +1,7 @@
 package com.mashup.thing.authentication;
 
 import com.mashup.thing.exception.aop.FailAuthenticationException;
-import com.mashup.thing.user.UserRepository;
+import com.mashup.thing.user.domain.UserRepository;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

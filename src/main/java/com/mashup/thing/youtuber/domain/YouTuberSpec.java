@@ -1,10 +1,8 @@
-package com.mashup.thing.youtuber;
+package com.mashup.thing.youtuber.domain;
 
-import com.mashup.thing.youtuber.domain.YouTuber;
-import com.mashup.thing.youtuber.domain.YouTuber_;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.JoinType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
