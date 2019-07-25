@@ -1,6 +1,5 @@
-package com.mashup.thing.ranking.repository;
+package com.mashup.thing.ranking.domain;
 
-import com.mashup.thing.ranking.domain.Ranking;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

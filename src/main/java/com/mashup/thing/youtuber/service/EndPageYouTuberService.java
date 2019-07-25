@@ -1,18 +1,17 @@
 package com.mashup.thing.youtuber.service;
 
-import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import com.mashup.thing.exception.aop.FailAuthenticationException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
-import com.mashup.thing.review.ReviewRepository;
 import com.mashup.thing.review.domain.Liked;
 import com.mashup.thing.review.domain.Review;
-import com.mashup.thing.user.UserRepository;
+import com.mashup.thing.review.domain.ReviewRepository;
 import com.mashup.thing.user.domain.User;
-import com.mashup.thing.video.VideoRepository;
+import com.mashup.thing.user.domain.UserRepository;
 import com.mashup.thing.video.domain.Video;
-import com.mashup.thing.youtuber.YouTuberMapper;
-import com.mashup.thing.youtuber.YouTuberRepository;
+import com.mashup.thing.video.domain.VideoRepository;
 import com.mashup.thing.youtuber.domain.YouTuber;
+import com.mashup.thing.youtuber.domain.YouTuberRepository;
+import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

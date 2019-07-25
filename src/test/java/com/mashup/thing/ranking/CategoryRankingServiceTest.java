@@ -1,10 +1,11 @@
 package com.mashup.thing.ranking;
 
-import com.mashup.thing.category.CategoryRepository;
+import com.mashup.thing.category.domain.CategoryRepository;
 import com.mashup.thing.exception.category.NotFoundCategoryException;
-import com.mashup.thing.ranking.repository.CheckRankingRepository;
-import com.mashup.thing.ranking.repository.RankingRepository;
+import com.mashup.thing.ranking.domain.CheckRankingRepository;
+import com.mashup.thing.ranking.domain.RankingRepository;
 import com.mashup.thing.ranking.service.CategoryRankingService;
+import com.mashup.thing.ranking.service.RankingMapper;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

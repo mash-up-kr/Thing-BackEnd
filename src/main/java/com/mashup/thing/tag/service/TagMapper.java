@@ -1,5 +1,6 @@
-package com.mashup.thing.tag;
+package com.mashup.thing.tag.service;
 
+import com.mashup.thing.tag.ResTagsDto;
 import com.mashup.thing.tag.domain.Tag;
 import com.mashup.thing.tag.domain.TagType;
 import org.springframework.stereotype.Component;

@@ -2,13 +2,12 @@ package com.mashup.thing.review.service;
 
 import com.mashup.thing.exception.user.NotFoundUserException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
-import com.mashup.thing.review.ReviewMapper;
-import com.mashup.thing.review.ReviewRepository;
+import com.mashup.thing.review.domain.ReviewRepository;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.review.dto.ReqWriteReviewDto;
-import com.mashup.thing.user.UserRepository;
+import com.mashup.thing.user.domain.UserRepository;
 import com.mashup.thing.user.domain.User;
-import com.mashup.thing.youtuber.YouTuberRepository;
+import com.mashup.thing.youtuber.domain.YouTuberRepository;
 import com.mashup.thing.youtuber.domain.YouTuber;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
