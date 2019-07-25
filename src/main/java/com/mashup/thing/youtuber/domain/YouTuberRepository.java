@@ -1,6 +1,5 @@
-package com.mashup.thing.youtuber;
+package com.mashup.thing.youtuber.domain;
 
-import com.mashup.thing.youtuber.domain.YouTuber;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

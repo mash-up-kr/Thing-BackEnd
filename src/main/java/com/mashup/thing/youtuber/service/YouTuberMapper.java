@@ -1,9 +1,9 @@
-package com.mashup.thing.youtuber;
+package com.mashup.thing.youtuber.service;
 
+import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.video.domain.Video;
 import com.mashup.thing.youtuber.domain.YouTuber;
-import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import com.mashup.thing.youtuber.dto.ResHomeDto;
 import com.mashup.thing.youtuber.dto.ResRecommendationDto;
 import com.mashup.thing.youtuber.dto.ResYouTuberDto;
@@ -136,6 +136,5 @@ public class YouTuberMapper {
                         .build())
                 .collect(Collectors.toList());
     }
-
 
 }

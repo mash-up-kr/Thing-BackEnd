@@ -1,6 +1,5 @@
-package com.mashup.thing.user;
+package com.mashup.thing.user.domain;
 
-import com.mashup.thing.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

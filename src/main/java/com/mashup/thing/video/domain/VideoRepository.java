@@ -1,6 +1,5 @@
-package com.mashup.thing.video;
+package com.mashup.thing.video.domain;
 
-import com.mashup.thing.video.domain.Video;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

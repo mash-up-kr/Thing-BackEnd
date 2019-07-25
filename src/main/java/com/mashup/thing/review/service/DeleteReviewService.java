@@ -2,10 +2,10 @@ package com.mashup.thing.review.service;
 
 import com.mashup.thing.exception.review.NotFoundReviewException;
 import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
-import com.mashup.thing.review.ReviewRepository;
+import com.mashup.thing.review.domain.ReviewRepository;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.review.dto.ReqDeleteReviewDto;
-import com.mashup.thing.youtuber.YouTuberRepository;
+import com.mashup.thing.youtuber.domain.YouTuberRepository;
 import com.mashup.thing.youtuber.domain.YouTuber;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,5 @@
-package com.mashup.thing.review;
+package com.mashup.thing.review.domain;
 
-import com.mashup.thing.review.domain.Liked;
-import com.mashup.thing.review.domain.Review;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.mashup.thing.review;
+package com.mashup.thing.review.service;
 
 import com.mashup.thing.review.domain.Liked;
 import com.mashup.thing.review.domain.Review;

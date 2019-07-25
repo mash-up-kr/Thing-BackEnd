@@ -2,6 +2,7 @@ package com.mashup.thing.user;
 
 import com.mashup.thing.exception.user.ExistNicknameException;
 import com.mashup.thing.exception.user.ExistUidException;
+import com.mashup.thing.user.domain.UserRepository;
 import com.mashup.thing.user.dto.ReqSignUpUserDto;
 import com.mashup.thing.user.service.SignInUserService;
 import com.mashup.thing.user.service.UpdateUserService;
