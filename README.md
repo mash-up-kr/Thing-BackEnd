@@ -16,3 +16,6 @@
 
 ## Domain
 - [Domain](https://github.com/mash-up-kr/Thing-BackEnd/issues/4)
+
+## ERD
+- [ERD](https://github.com/mash-up-kr/Thing-BackEnd/issues/149)
