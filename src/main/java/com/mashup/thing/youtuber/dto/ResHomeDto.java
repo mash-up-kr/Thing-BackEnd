@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 public class ResHomeDto {
-    private List<ResYouTuberDto> recommendationYouTuber;
+    private List<ResYouTuberDto> recommendedYouTuber;
     private List<ResSoaringYouTuberDto> soaringYouTuber;
 
     @Getter
@@ -25,12 +25,12 @@ public class ResHomeDto {
 
 
     public ResHomeDto(List<ResYouTuberDto> resYouTuberDtos, List<ResSoaringYouTuberDto> resSoaringYouTuberDtos) {
-        this.recommendationYouTuber = resYouTuberDtos;
+        this.recommendedYouTuber = resYouTuberDtos;
         this.soaringYouTuber = resSoaringYouTuberDtos;
     }
 
     public ResHomeDto(List<ResSoaringYouTuberDto> resSoaringYouTuberDtos) {
-        this.recommendationYouTuber = new ArrayList<>();
+        this.recommendedYouTuber = new ArrayList<>();
         this.soaringYouTuber = resSoaringYouTuberDtos;
     }
 }
