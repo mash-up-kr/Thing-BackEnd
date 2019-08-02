@@ -28,6 +28,8 @@ public class UserMapper {
                                 .categoryType(categoryType.getCategoryType())
                                 .build())
                         .collect(Collectors.toList()))
+                .commonTag(Arrays.stream(user.getCommonTag().split(",")).collect(Collectors.toList()))
+                .categoryTag(Arrays.stream(user.getCategoryTag().split(",")).collect(Collectors.toList()))
                 .build();
     }
 
