@@ -17,6 +17,8 @@ public class ResSignInDto {
     private String profileUrl;
     private String gender;
     private List<ResCategoryDto> categories;
+    private List<String> commonTag;
+    private List<String> categoryTag;
 
     @Getter
     @Builder
