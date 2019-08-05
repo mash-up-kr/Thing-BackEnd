@@ -7,7 +7,9 @@ import com.mashup.thing.user.dto.ResSignInDto;
 import com.mashup.thing.user.dto.ResUpdateDto;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,10 +30,18 @@ public class UserMapper {
                                 .categoryType(categoryType.getCategoryType())
                                 .build())
                         .collect(Collectors.toList()))
-                .commonTag(Arrays.stream(user.getCommonTag().split(",")).collect(Collectors.toList()))
-                .categoryTag(Arrays.stream(user.getCategoryTag().split(",")).collect(Collectors.toList()))
+                .commonTag(toTagList(user.getCommonTag()))
+                .categoryTag(toTagList(user.getCategoryTag()))
                 .build();
     }
+
+    private List<String> toTagList(String tag) {
+        if(tag == null) {
+            return new ArrayList<>();
+        }
+        return Arrays.stream(tag.split(",")).collect(Collectors.toList());
+    }
+
 
     public User toUser(ReqSignUpUserDto reqSignUpUserDto) {
         return new User(reqSignUpUserDto.getUid(),
