@@ -38,10 +38,10 @@ public class YouTuberSpec {
     private static Specification<YouTuber> isCommonTags(List<String> commonTags) {
         Specification<YouTuber> commonSpecification;
         int size = commonTags.size();
-        commonSpecification = YouTuberSpec.isTag(commonTags.get(0));
+        commonSpecification = YouTuberSpec.isCommonTag(commonTags.get(0));
         for (int i = 1; i < size; i++) {
 
-            commonSpecification = commonSpecification.and(YouTuberSpec.isTag(commonTags.get(i)));
+            commonSpecification = commonSpecification.and(YouTuberSpec.isCommonTag(commonTags.get(i)));
         }
         return commonSpecification;
     }
@@ -49,17 +49,22 @@ public class YouTuberSpec {
     private static Specification<YouTuber> isCategoryTags(List<String> categoryTags) {
         Specification<YouTuber> categorySpecification;
         int size = categoryTags.size();
-        categorySpecification = YouTuberSpec.isTag(categoryTags.get(0));
+        categorySpecification = YouTuberSpec.isCategoryTag(categoryTags.get(0));
         for (int i = 1; i < size; i++) {
-            categorySpecification = categorySpecification.or(YouTuberSpec.isTag(categoryTags.get(i)));
+            categorySpecification = categorySpecification.or(YouTuberSpec.isCategoryTag(categoryTags.get(i)));
         }
         return categorySpecification;
     }
 
 
-    private static Specification<YouTuber> isTag(String tag) {
+    private static Specification<YouTuber> isCommonTag(String tag) {
         return (Specification<YouTuber>) (root, query, criteriaBuilder) ->
-                criteriaBuilder.like(root.get(YouTuber_.TAG), "%" + tag + "%");
+                criteriaBuilder.like(root.get(YouTuber_.COMMON_TAG), "%" + tag + "%");
+    }
+
+    private static Specification<YouTuber> isCategoryTag(String tag) {
+        return (Specification<YouTuber>) (root, query, criteriaBuilder) ->
+                criteriaBuilder.like(root.get(YouTuber_.CATEGORY_TAG), "%" + tag + "%");
     }
 
 }

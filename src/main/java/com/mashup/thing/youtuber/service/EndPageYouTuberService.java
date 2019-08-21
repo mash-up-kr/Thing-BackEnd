@@ -5,6 +5,7 @@ import com.mashup.thing.exception.youtuber.NotFoundYouTuBerException;
 import com.mashup.thing.review.domain.Liked;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.review.domain.ReviewRepository;
+import com.mashup.thing.tag.domain.TagRepository;
 import com.mashup.thing.user.domain.User;
 import com.mashup.thing.user.domain.UserRepository;
 import com.mashup.thing.video.domain.Video;
@@ -24,6 +25,7 @@ public class EndPageYouTuberService {
     private final VideoRepository videoRepository;
     private final YouTuberRepository youTuberRepository;
     private final UserRepository userRepository;
+    private final TagRepository tagRepository;
     private final YouTuberMapper youTuberMapper;
 
     private final static String SORT_PUBLISHED_AT = "publishedAt";
@@ -33,11 +35,13 @@ public class EndPageYouTuberService {
                                   VideoRepository videoRepository,
                                   YouTuberRepository youTuberRepository,
                                   UserRepository userRepository,
+                                  TagRepository tagRepository,
                                   YouTuberMapper youTuberMapper) {
         this.reviewRepository = reviewRepository;
         this.videoRepository = videoRepository;
         this.youTuberRepository = youTuberRepository;
         this.userRepository = userRepository;
+        this.tagRepository = tagRepository;
         this.youTuberMapper = youTuberMapper;
     }
 
