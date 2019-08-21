@@ -87,6 +87,7 @@ public class YouTuberMapper {
                 .map(youTuber -> ResYouTuberDto.builder()
                         .id(youTuber.getId())
                         .name(youTuber.getName())
+                        .category(CategoryType.findByCategory(youTuber.getCategoryId()).getCategoryType())
                         .thumbnail(youTuber.getThumbnail())
                         .tag(mergeTag(youTuber.getCategoryTag(), youTuber.getCommonTag()))
                         .videos(youTuber.getVideos().stream().limit(VIDEO_LIMIT).map(
@@ -107,6 +108,7 @@ public class YouTuberMapper {
                 .map(youTuber -> ResHomeDto.ResSoaringYouTuberDto.builder()
                         .id(youTuber.getId())
                         .name(youTuber.getName())
+                        .category(CategoryType.findByCategory(youTuber.getCategoryId()).getCategoryType())
                         .soaring(youTuber.getSoaring())
                         .thumbnail(youTuber.getThumbnail())
                         .tag(mergeTag(youTuber.getCategoryTag(), youTuber.getCommonTag()))
@@ -147,6 +149,8 @@ public class YouTuberMapper {
     }
 
     private List<String> mergeTag(String categoryTag, String commonTag) {
+        categoryTag = Optional.ofNullable(categoryTag).orElse(SEPARATOR);
+        commonTag = Optional.ofNullable(commonTag).orElse(SEPARATOR);
         List<String> mergeTags =  Arrays.stream(commonTag.split(SEPARATOR)).collect(Collectors.toList());
         mergeTags.addAll(Arrays.stream(categoryTag.split(SEPARATOR)).collect(Collectors.toList()));
 
