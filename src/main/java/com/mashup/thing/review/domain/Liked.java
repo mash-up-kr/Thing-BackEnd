@@ -1,6 +1,6 @@
 package com.mashup.thing.review.domain;
 
-import com.mashup.thing.exception.review.NotFoundLiked;
+import com.mashup.thing.exception.review.NotFoundLikedException;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public enum Liked {
         return Arrays.stream(Liked.values())
                 .filter(liked -> liked.hasLike(like))
                 .findAny()
-                .orElseThrow(NotFoundLiked::new);
+                .orElseThrow(NotFoundLikedException::new);
     }
 
     public boolean hasLike(Integer code) {

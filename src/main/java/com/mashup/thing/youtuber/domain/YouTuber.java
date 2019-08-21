@@ -34,7 +34,8 @@ public class YouTuber {
     private String country;
     private Long likeCount;
     private Long noCount;
-    private String tag;
+    private String commonTag;
+    private String categoryTag;
     private Long categoryId;
 
     @OneToMany

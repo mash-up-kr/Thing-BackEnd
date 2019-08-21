@@ -1,5 +1,9 @@
 package com.mashup.thing.category.domain;
 
+import com.mashup.thing.exception.category.NotFoundCategoryTypeException;
+
+import java.util.Arrays;
+
 public enum CategoryType {
 
 
@@ -24,5 +28,16 @@ public enum CategoryType {
 
     public Long getPrimaryKey() {
         return primaryKey;
+    }
+
+    public static CategoryType findByCategory(Long primaryKey) {
+        return Arrays.stream(CategoryType.values())
+                .filter(categoryType -> categoryType.hasCategory(primaryKey))
+                .findAny()
+                .orElseThrow(NotFoundCategoryTypeException::new);
+    }
+
+    public boolean hasCategory(Long primaryKey) {
+        return this.primaryKey.equals(primaryKey);
     }
 }
