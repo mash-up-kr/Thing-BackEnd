@@ -1,5 +1,6 @@
 package com.mashup.thing.youtuber.service;
 
+import com.mashup.thing.category.domain.CategoryType;
 import com.mashup.thing.youtuber.dto.ResEndPageDto;
 import com.mashup.thing.review.domain.Review;
 import com.mashup.thing.video.domain.Video;
@@ -30,6 +31,8 @@ public class YouTuberMapper {
         List<ResEndPageDto.ResEndPageReviewDto> resEndPageLikeReviews = this.toResEndReviewDto(likeReview, userId);
         List<ResEndPageDto.ResEndPageReviewDto> resEndPageNoReviews = this.toResEndReviewDto(noReview, userId);
 
+        resEndPageLikeReviews.addAll(resEndPageLikeReviews);
+
         return ResEndPageDto.builder()
                 .id(youTuber.getId())
                 .name(youTuber.getName())
@@ -45,6 +48,13 @@ public class YouTuberMapper {
                 .videos(resEndPageVideos)
                 .likeReviews(resEndPageLikeReviews)
                 .noReviews(resEndPageNoReviews)
+                .category(CategoryType.findByCategory(youTuber.getCategoryId()).getCategoryType())
+                .commonTags(Arrays.stream(
+                        Optional.ofNullable(
+                                youTuber.getCommonTag()).orElse(SEPARATOR).split(SEPARATOR)).collect(Collectors.toList()))
+                .categoryTags(Arrays.stream(
+                        Optional.ofNullable(
+                                youTuber.getCategoryTag()).orElse(SEPARATOR).split(SEPARATOR)).collect(Collectors.toList()))
                 .build();
     }
 
@@ -78,7 +88,7 @@ public class YouTuberMapper {
                         .id(youTuber.getId())
                         .name(youTuber.getName())
                         .thumbnail(youTuber.getThumbnail())
-                        .tag(Arrays.stream(youTuber.getTag().split(SEPARATOR)).collect(Collectors.toList()))
+                        .tag(mergeTag(youTuber.getCategoryTag(), youTuber.getCommonTag()))
                         .videos(youTuber.getVideos().stream().limit(VIDEO_LIMIT).map(
                                 video -> ResYouTuberDto.ResVideoDto.builder()
                                         .id(video.getId())
@@ -90,6 +100,8 @@ public class YouTuberMapper {
                         .build()).collect(Collectors.toList());
     }
 
+
+
     private List<ResHomeDto.ResSoaringYouTuberDto> toResSoaringYouTuberDtos(Page<YouTuber> soaringYoutubers) {
         return soaringYoutubers.stream()
                 .map(youTuber -> ResHomeDto.ResSoaringYouTuberDto.builder()
@@ -97,10 +109,7 @@ public class YouTuberMapper {
                         .name(youTuber.getName())
                         .soaring(youTuber.getSoaring())
                         .thumbnail(youTuber.getThumbnail())
-                        .tag(Arrays.stream(
-                                Optional.ofNullable(
-                                        youTuber.getTag()).orElse(SEPARATOR).split(SEPARATOR))
-                                .collect(Collectors.toList()))
+                        .tag(mergeTag(youTuber.getCategoryTag(), youTuber.getCommonTag()))
                         .build())
                 .collect(Collectors.toList());
     }
@@ -135,6 +144,13 @@ public class YouTuberMapper {
                         .owner(review.isOwner(userId))
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    private List<String> mergeTag(String categoryTag, String commonTag) {
+        List<String> mergeTags =  Arrays.stream(commonTag.split(SEPARATOR)).collect(Collectors.toList());
+        mergeTags.addAll(Arrays.stream(categoryTag.split(SEPARATOR)).collect(Collectors.toList()));
+
+        return mergeTags;
     }
 
 }

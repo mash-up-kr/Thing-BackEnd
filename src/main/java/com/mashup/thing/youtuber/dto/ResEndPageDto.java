@@ -16,6 +16,9 @@ public class ResEndPageDto {
     private String description;
     private String bannerImgUrl;
     private LocalDateTime publishedAt;
+    private String category;
+    private List<String> commonTags;
+    private List<String> categoryTags;
     private String thumbnail;
     private Long subscriberCount;
     private Long viewCount;

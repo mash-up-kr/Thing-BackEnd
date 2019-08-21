@@ -4,16 +4,16 @@ import com.mashup.thing.exception.BaseException;
 import com.mashup.thing.exception.ErrorModel;
 import org.springframework.http.HttpStatus;
 
-public class NotFoundLiked extends BaseException {
-    public NotFoundLiked() {
+public class NotFoundLikedException extends BaseException {
+    public NotFoundLikedException() {
         this(HttpStatus.BAD_REQUEST);
     }
 
-    public NotFoundLiked(HttpStatus httpStatus) {
+    public NotFoundLikedException(HttpStatus httpStatus) {
         this(4005, httpStatus);
     }
 
-    public NotFoundLiked(int code, HttpStatus httpStatus) {
+    public NotFoundLikedException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
                 .code(code)
                 .httpStatus(httpStatus)
