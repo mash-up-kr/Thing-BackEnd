@@ -18,6 +18,7 @@ public class ResHomeDto {
         private Long id;
         private String name;
         private String thumbnail;
+        private String category;
         private List<String> tag;
         private Double soaring;
 

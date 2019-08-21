@@ -10,7 +10,7 @@ public class NotFoundCategoryTypeException extends BaseException {
     }
 
     public NotFoundCategoryTypeException(HttpStatus httpStatus) {
-        this(4006, httpStatus);
+        this(4007, httpStatus);
     }
 
     public NotFoundCategoryTypeException(int code, HttpStatus httpStatus) {
