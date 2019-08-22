@@ -54,7 +54,7 @@ public class RecommendationYouTuberService {
     }
 
     public ResHomeDto searchByUser(String uid) {
-        User user = userRepository.findByUid(uid).orElseThrow(NotFoundUserException::new);
+        User user = userRepository.findByUid("NXNzY3uMXTNvSgGPtcKpZaFO2aJ3").orElseThrow(NotFoundUserException::new);
 
         Page<YouTuber> soaringYouTubers = youTuberRepository.findByOrderBySoaringDesc(PageRequest.of(0, 3));
 
