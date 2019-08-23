@@ -65,7 +65,7 @@ public class User {
     }
 
     private String createTag(String tag) {
-        return "#" + tag + ",";
+        return tag + ",";
     }
 
     public Boolean isTag() {
