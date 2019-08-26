@@ -75,3 +75,15 @@ spring:
       hibernate:
         format_sql: true
 
+---
+spring:
+  profiles: set1
+server:
+  port: ${SET1_PORT}
+
+---
+spring:
+  profiles: set2
+
+server:
+  port: ${SET2_PORT}
